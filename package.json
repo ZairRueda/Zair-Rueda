@@ -1,0 +1,8 @@
+{
+  "name": "zair-rueda-portfolio",
+  "private": true,
+  "description": "Portafolio estático de Andrés Zair Jiménez Rueda (HTML, CSS, JS y Three.js). No requiere build.",
+  "engines": {
+    "node": "26.x"
+  }
+}
