@@ -1,1008 +1,559 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!--==================== UNICONS ====================-->
-        <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> -->
-        <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-        
-        <!--==================== SWIPER CSS ====================-->
-        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-        
-        <!--==================== CSS ====================-->
-        <link rel="stylesheet" href="assets/css/styles.css">
-
-        <title>Andrés Zair Jiménez Rueda - Portfolio</title>
-    </head>
-    <body>
-        <!--==================== HEADER ====================-->
-        <header class="header" id="header">
-
-            <nav class="nav container">
-
-                <a href="#" class="nav__logo">Zair</a>
-
-                <div class="nav__menu" id="nav-menu">
-
-                    <ul class="nav__list grid">
-
-                        <li class="nav__item">
-                            <a href="#home" class="nav__link active-link">
-                                <i class='bx bx-home-alt nav__icon'></i> Inicio
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#about" class="nav__link">
-                                <i class='bx bx-user nav__icon' ></i> Sobre
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#skills" class="nav__link">
-                                <i class='bx bx-file nav__icon' ></i> Herramientas
-                            </a>
-                        </li>
-                            <a href="#services" class="nav__link">
-                                <i class='bx bx-briefcase nav__icon' ></i> Servicios
-                            </a>
-                        <li class="nav__item">
-                            <a href="#portfolio" class="nav__link">
-                                <i class="bx bx-photo-album nav__icon"></i> Portafolio
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#contact" class="nav__link">
-                                <i class='bx bx-send nav__icon'></i> Contactame
-                            </a>
-                        </li>
-            
-                    </ul>
-
-                    <i class="bx bx-command nav_close" id="nav-close"></i>
-
-                </div>
-
-                <div class="nav__btns">
-
-                    <!-- Theme change button -->
-                    
-                    <i class='bx bx-moon change-theme' id="theme-button"></i>
-                    <!-- <i class='bx bx-sun' ></i> -->
-
-                    <div class="nav__toggle toggle" id="nav-toggle">
-                        <i class='bx bx-grid-alt' ></i>
-                    </div>
-                </div>
-            </nav>
-            
-        </header>
-
-        <!--==================== MAIN ====================-->
-        <main class="main">
-            <!--==================== HOME ====================-->
-            <section class="home section" id="home">
-                <div class="home__container container grid">
-                    <div class="home__content grid">
-                        <div class="home__social">
-                            <a href="https://www.linkedin.com/in/andres-zair-jimenez-rueda-029262174/" target="_blank" class="home__social-icon">
-                                <i class="bx bxl-linkedin"></i>
-                            </a>
-
-                            <!-- <a href="https://dribbble.com/" target="_blank" class="home__social-icon">
-                                <i class="bx bxl-dribbble"></i>
-                            </a> -->
-
-                            <a href="https://github.com/ZairRueda" target="_blank" class="home__social-icon">
-                                <i class="bx bxl-github"></i>
-                            </a>
-                        </div>
-
-                        <div class="home__img">
-                            <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <mask id="mask0" mask-type="alpha">
-                                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-                                    130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-                                    97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                                </mask>
-                                <g mask="url(#mask0)">
-                                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-                                    165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-                                    129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                                    <image class="home__blob-img" x='12' y='10' xlink:href="assets/img/perfil.png"/>
-                                </g>
-                            </svg>
-                        </div>
-
-                        <div class="home__data">
-                            <h1 class="home__title">
-                                Hola, soy Andrés Zair
-                            </h1>
-                            <h3 class="home__subtitle">
-                                Desarrollador Full Stack
-                            </h3>
-                            <p class="home__description">
-                                Experto en PHP/Laravel, React, Node.js con 4+ años de experiencia en proyectos tecnológicos de alto impacto.
-                            </p>
-                            <a href="#contact" class="button button--flex">
-                                Contactame<i class="bx bx-message-alt button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="home__scroll">
-                        <a href="#about" class="home__scroll-button button--flex">
-                            <i class="bx bx-mouse home__scroll-mouse"></i>
-                            <span class="home__scroll-name">Ir Abajo</span>
-                            <i class="bx bx-down-arrow-alt home__scroll-arrow"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== ABOUT ====================-->
-            <section class="about section" id="about">
-
-                <h2 class="section__title">Sobre Mi</h2>
-                <span class="section__subtitle">Mi introduccion</span>
-        
-                <div class="about__container container grid">
-                    <img src="assets/img/about.jpg" alt="" class="about__img">
-
-                    <div class="about__data">
-                        <p class="about__description">
-                            Desarrollador Full Stack con experiencia en proyectos tecnológicos de alto impacto. Experto en arquitecturas escalables y optimización de procesos con tecnologías como Laravel, React y AWS. Combino iniciativa propia con trabajo colaborativo bajo metodologías ágiles (Scrum).
-                        </p>
-
-                        <div class="about__info">
-                            <div>
-                                <span class="about__info-title">04+</span>
-                                <span class="about__info-name">Años de <br> Experiencia</span>
-                            </div>
-
-                            <div>
-                                <span class="about__info-title">20+</span>
-                                <span class="about__info-name">Proyectos <br> completos</span>
-                            </div>
-
-                            <div>
-                                <span class="about__info-title">
-                                    <!-- <i class='bx bx-wink-tongue' style='font-size: 2rem'></i> -->
-                                    02
-                                </span>
-                                <span class="about__info-name">Trabajos</span>
-                            </div>
-                        </div>
-
-                        <div class="about__buttons">
-                            <a download="" href="assets/pdf/CV-Zair.pdf" class="button button--flex">
-                                Descargar CV
-                                <i class="bx bxs-download button__icon"></i>
-                            </a>
-                            
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== SKILLS ====================-->
-            <section class="skills section" id="skills">
-
-                <h2 class="section__title">Herramientas</h2>
-
-                <span class="section__subtitle">Mi nivel tecnico</span>
-
-                <div class="skills__container container grid">
-                    <!-- <div> -->
-                        <!--==================== SKILSS 1 ====================-->
-                        <div class="skills__content skills__open">
-                            <div class="skills__header">
-                                <i class="bx bx-bracket skills__icon"></i>
-
-                                <div>
-                                    <h1 class="skills__titles">Frontend Developer</h1>
-
-                                    <span class="skills__subtitle"></span>
-                                </div>
-
-                                <i class="bx bx-chevron-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">HTML</h3>
-                                        <!-- <span class="skills__number">90%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__html"></span>
-                                    </div> -->
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">CSS</h3>
-                                        <!-- <span class="skills__number">80%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__css"></span>
-                                    </div> -->
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">JavaScript</h3>
-                                        <!-- <span class="skills__number">60%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__js"></span>
-                                    </div> -->
-                                </div>
-
-                                <!-- <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Angular</h3>
-                                        <span class="skills__number">85%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__angular"></span>
-                                    </div>
-                                </div> -->
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">React</h3>
-                                        <!-- <span class="skills__number">85%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__react"></span>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                        <!--==================== SKILSS 2 ====================-->
-                        <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="bx bx-server skills__icon"></i>
-
-                                <div>
-                                    <h1 class="skills__titles">Desarrollo Backend & DevOps</h1>
-
-                                    <span class="skills__subtitle"></span>
-                                </div>
-
-                                <i class="bx bx-chevron-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">PHP</h3>
-                                        <!-- <span class="skills__number">80%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__php"></span>
-                                    </div> -->
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Node Js</h3>
-                                        <!-- <span class="skills__number">70%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__node"></span>
-                                    </div> -->
-                                </div>
-
-                                <!-- <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Firebase</h3>
-                                        <span class="skills__number">90%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__firebase"></span>
-                                    </div>
-                                </div> -->
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Python</h3>
-                                        <!-- <span class="skills__number">55%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__python"></span>
-                                    </div> -->
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">AWS</h3>
-                                        <!-- <span class="skills__number">55%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__aws"></span>
-                                    </div> -->
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Docker</h3>
-                                        <!-- <span class="skills__number">15%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__docker"></span>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--==================== SKILSS 3 ====================-->
-                        <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="bx bxs-book-content skills__icon"></i>
-
-                                <div>
-                                    <h1 class="skills__titles">Software</h1>
-
-                                    <span class="skills__subtitle"></span>
-                                </div>
-
-                                <i class="bx bx-chevron-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">.NET</h3>
-                                        <!-- <span class="skills__number">20%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__figma"></span>
-                                    </div> -->
-                                </div>
-
-                                <!-- <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Sketch</h3>
-                                        <span class="skills__number">85%</span>
-                                    </div> 
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__sketch"></span>
-                                    </div>
-                                </div> -->
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">C#</h3>
-                                        <!-- <span class="skills__number">40%</span> -->
-                                    </div>
-                                    <!-- <div class="skills__bar">
-                                        <span class="skills__percentage skills__photoshop"></span>
-                                    </div> -->
-                                </div>
-
-                                <!-- <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Inkscape</h3>
-                                        <span class="skills__number">55%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__inkscape"></span>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                    <!-- </div> -->
-                </div>
-
-            </section>
-
-            <!--==================== QUALIFICATION ====================-->
-            <section class="qualification section">
-
-                <h2 class="section__title">Certificacion</h2>
-                <span class="section__subtitle">Carrera Personal</span>
-
-                <div class="qualification__container container">
-                    <div class="qualification__tabs">
-                        <div class="qualification__button button--flex qualification__active" data-target='#education'>
-                            <i class="bx bxs-graduation qualification__icon"></i>
-                            Educacion
-                        </div>
-                        <div class="qualification__button button--flex" data-target="#work">
-                            <i class="bx bx-briefcase-alt qualification__icon"></i>
-                            Trabajo
-                        </div>
-                    </div>
-
-                    <div class="qualification__sections">
-                        <!-- ============= QUIALIFICATION CONTENT 1 ============ -->
-                        <div class="qualification__content qualification__active" data-content id="education">
-                            <!-- ============= QUIALIFICATION 1 ============ -->
-                            <div class="qualification__data">
-                                <div>
-                                    <h3 class="qualification__title">Tecnico Fisico Matematico</h3>
-                                    <span class="qualification__subtitle">Mexico - Pre-Universidad</span>
-                                    <div class="qualification__calendar">
-                                        <i class="bx bx-calendar"></i>
-                                        2009 - 2014
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-                            </div>
-
-                            <!-- ============= QUIALIFICATION 2 ============ -->
-                            <div class="qualification__data">
-
-                                <div></div>
-
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-
-                                <div>
-                                    <h3 class="qualification__title">Desarrollo Web</h3>
-                                    <span class="qualification__subtitle">Libros - Udemy</span>
-                                    <div class="qualification__calendar">
-                                        <i class="bx bx-calendar"></i>
-                                        2019 - 2020
-                                    </div>
-                                </div>
-
-                                
-                            </div>
-
-                            <!-- ============= QUIALIFICATION 3 ============ -->
-                            <div class="qualification__data">
-
-                                <div>
-                                    <h3 class="qualification__title">Desarrollo Backend y Frontend</h3>
-                                    <span class="qualification__subtitle">Mexico - Udemy</span>
-                                    <div class="qualification__calendar">
-                                        <i class="bx bx-calendar"></i>
-                                        2020
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-                            </div>
-
-                            <!-- ============= QUIALIFICATION 4 ============ -->
-                            <div class="qualification__data">
-                                <div></div>
-
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <!-- <span class="qualification__line"></span> -->
-                                </div>
-
-                                <div>
-                                    <h3 class="qualification__title">DevOps</h3>
-                                    <span class="qualification__subtitle">Mexico</span>
-                                    <div class="qualification__calendar">
-                                        <i class="bx bx-calendar"></i>
-                                        2020 - 2021
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ============= QUIALIFICATION CONTENT 2 ============ -->
-                        <div class="qualification__content" data-content id="work">
-                            <!-- ============= QUIALIFICATION 1 ============ -->
-                            <div class="qualification__data">
-                                <div>
-                                    <h3 class="qualification__title">NAVIOMAR</h3>
-                                    <span class="qualification__subtitle">Desarrollador Web Full Stack Senior<br>PHP/Laravel, React, Node.js, AWS</span>
-                                    <div class="qualification__calendar">
-                                        <i class="bx bx-calendar"></i>
-                                        Mayo 2022 - Actual
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-                            </div>
-
-                            <!-- ============= QUIALIFICATION 2 ============ -->
-                            <div class="qualification__data">
-
-                                <div></div>
-
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <!-- <span class="qualification__line"></span> -->
-                                </div>
-
-                                <div>
-                                    <h3 class="qualification__title">Freelancer</h3>
-                                    <span class="qualification__subtitle">Desarrollador Web Full Stack<br>HTML, CSS, JavaScript, React</span>
-                                    <div class="qualification__calendar">
-                                        <i class="bx bx-calendar"></i>
-                                        Enero 2021 - Mayo 2022
-                                    </div>
-                                </div>
-
-                                
-                            </div>
-
-                            <!-- ============= QUIALIFICATION 3 ============ -->
-                            <!-- <div class="qualification__data">
-
-                                <div>
-                                    <h3 class="qualification__title">UI Designer</h3>
-                                    <span class="qualification__subtitle">Figma - Spain</span>
-                                    <div class="qualification__calendar">
-                                        <i class="bx bx-calendar"></i>
-                                        2017 - 2019
-                                    </div>
-                                </div>
-
-                                
-                                <div>
-                                    <span class="qualification__rounder"></span> -->
-                                    <!-- <span class="qualification__line"></span> -->
-                                <!-- </div>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== SERVICES ====================-->
-            <section class="services section" id="services">
-
-                <h2 class="section__title">Servicios</h2>
-                <span class="section__subtitle"></span>
-
-                <div class="services__container container grid">
-                    <!--==================== SERVICES 1 ====================--> 
-                    <div class="services__content">
-                        <div>
-                            <i class="bx bx-cuboid services__icon"></i>
-                            <h3 class="services__title">Apps <br> Web</h3>
-                        </div>
-
-                        <span class="button button--flex button--small button--link services__button">
-                            Ver Más
-                            <i class="bx bx-right-arrow-alt button__icon"></i>
-                        </span>
-
-                        <div class="services__modal">
-                            <div class="services__modal-content">
-                                
-                                <h4 class="services__modal-title">Apps <br> Web</h4>
-                                <i class="bx bx-x services__modal-close"></i>
-
-                                <ul class="services__modal-services grid">
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Desarrollo interfas de usuario</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Pagina Web</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Performance</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Posicionamiento de marca</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== SERVICES 2 ====================--> 
-                    <div class="services__content">
-                        <div>
-                            <i class="bx bx-code services__icon"></i>
-                            <h3 class="services__title">Frontend <br> Developer</h3>
-                        </div>
-
-                        <span class="button button--flex button--small button--link services__button">
-                            Ver Más
-                            <i class="bx bx-right-arrow-alt button__icon"></i>
-                        </span>
-
-                        <div class="services__modal">
-                            <div class="services__modal-content">
-                                
-                                <h4 class="services__modal-title"> Frontend <br> Developer</h4>
-                                <i class="bx bx-x services__modal-close"></i>
-
-                                <ul class="services__modal-services grid">
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Mejora de Estilo</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Paginas Funcionales</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Interactividad</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Progressive Web Aplications</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--==================== SERVICES 3 ====================--> 
-                    <div class="services__content">
-                        <div>
-                            <i class="bx bxs-server services__icon"></i>
-                            <h3 class="services__title">Backend <br> Developer</h3>
-                        </div>
-
-                        <span class="button button--flex button--small button--link services__button">
-                            Ver Más
-                            <i class="bx bx-right-arrow-alt button__icon"></i>
-                        </span>
-
-                        <div class="services__modal">
-                            <div class="services__modal-content">
-                                
-                                <h4 class="services__modal-title">Backend <br> Developer</h4>
-                                <i class="bx bx-x services__modal-close"></i>
-
-                                <ul class="services__modal-services grid">
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Creacion de Bases de Datos</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Estructura limpia</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>Estandarizacion</p>
-                                    </li>
-                                    <li class="services__modal-service">
-                                        <i class="bx bx-check-circle services__modal-icon"></i>
-                                        <p>REST APIs</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== PORTFOLIO ====================-->
-            <section class="portfolio section" id="portfolio">
-                <h2 class="section__title">Portafolio</h2>
-                <span class="section__subtitle">Trabajos mas relevantes</span>
-            
-                
-                <div class="portfolio__container container swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        <!--==================== PORTFOLIO 1 ====================-->
-                        <div class="portfolio__content grid swiper-slide">
-                            <img src="assets/img/portfolio1.png" alt="" class="portfolio__img">
-
-                            <div class="portfolio__data">
-                                <h3 class="portfolio__title">Real State</h3>
-                                <p class="portfolio__description">
-                                   Pagina Web para venta de propiedades
-                                   Con administrador, blog dinamico, creacion de vendedores y mucho mas... 
-                                </p>
-                                <a href="https://github.com/ZairRueda/Real-State-Project" class="button button--flex button--small portfolio__button">
-                                    Demo
-                                    <i class="bx bx-right-arrow-alt button__icon"></i>
-                                </a>
-                            </div>
-                        </div> 
-                        
-                        <!--==================== PORTFOLIO 2 ====================-->
-                        <div class="portfolio__content grid swiper-slide">
-                            <img src="assets/img/portfolio2.png" alt="" class="portfolio__img">
-
-                            <div class="portfolio__data">
-                                <h3 class="portfolio__title">Clientes Veterinaria</h3>
-                                <p class="portfolio__description">
-                                    Sistema de citas para clientes de veterinaria. Crea, Edita y Elimina.
-                                </p>
-                                <a href="https://veterinary-record-patients.vercel.app/" class="button button--flex button--small portfolio__button">
-                                    Demo
-                                    <i class="bx bx-right-arrow-alt button__icon"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--==================== PORTFOLIO 3 ====================-->
-                        <div class="portfolio__content grid swiper-slide">
-                            <img src="assets/img/portfolio3.png" alt="Imagen de proyecto" class="portfolio__img">
-
-                            <div class="portfolio__data">
-                                <h3 class="portfolio__title">Checador de Criptomonedas</h3>
-                                <p class="portfolio__description">
-                                    Aplicacion web que compara tu moneda de origen con alguna criptomoneda
-                                </p>
-                                <a href="https://crypto-checker-react-f0ettzx7f-zairrueda.vercel.app/" class="button button--flex button--small portfolio__button">
-                                    Demo
-                                    <i class="bx bx-right-arrow-alt button__icon"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--==================== PORTFOLIO 4 ====================-->
-                        <div class="portfolio__content grid swiper-slide">
-                            <img src="assets/img/portfolio4.png" alt="Sistema de Gestión de Préstamos" class="portfolio__img">
-
-                            <div class="portfolio__data">
-                                <h3 class="portfolio__title">Sistema de Gestión de Préstamos</h3>
-                                <p class="portfolio__description">
-                                    Arquitectura full stack con Next.js y Prisma para conexión a PostgreSQL. Implementación de AWS S3 para almacenamiento.
-                                </p>
-                                <a href="https://loan-management-system-production.up.railway.app/" class="button button--flex button--small portfolio__button">
-                                    Demo
-                                    <i class="bx bx-right-arrow-alt button__icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-button-next">
-                        <i class="bx bx-chevron-right swiper-portfolio-icon"></i>
-                    </div>
-                    <div class="swiper-button-prev">
-                        <i class="bx bx-chevron-left swiper-portfolio-icon"></i>
-                    </div>
-                    <div class="swiper-pagination">
-                        
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== PROJECT IN MIND ====================-->
-            <section class="project section">
-
-                <div class="project__bg">
-                    <div class="project__container container grid">
-                        <div class="project__data">
-                            <h2 class="project__title">¿Estas en busqueda de un desarrollador de software eficinete y sexy?</h2>
-                            <!-- <p class="project__description">
-                                Contact me now and get a 30% discount on your new project.
-                            </p> -->
-                            <a href="#contact" class="button button--flex button--white">
-                                Contactame
-                                <i class='bx bx-send project__icon button__icon'></i>
-                            </a>
-                        </div>
-
-                        <img src="assets/img/project.png" alt="">
-                    </div>
-                </div>
-
-            </section>
-
-            <!--==================== TESTIMONIAL ====================-->
-            <!-- <section class="testimonial section">
-                
-                <h2 class="section__title">Testimonial</h2>
-                <span class="section__subtitle">My client saying</span>
-
-                <div class="testimonial__container container swiper mySwiper swiper-container">
-                    <div class="swiper-wrapper">
-                        <!--==================== TESTIMONIAL 1 ====================--
-                        <div class="swiper-slide ">
-                            <div class="testimonial__content">
-                                <div class="testimonial__data">
-                                    <div class="testimonial__header">
-                                        <img src="assets/img/testimonial1.jpg" alt="" class="testimonial__img">
-
-                                        <div>
-                                            <h3 class="testimonial__name">Sara Smith</h3>
-                                            <span class="testimonial__client">Client</span>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                    </div>
-                                </div>
-
-                                <p class="testimonial__description">
-                                    I get a good impression, I carry out my project with all the possible quality and attention and support 24 hours a day.
-                                </p>
-                            </div>
-                        </div>
-                        <!--==================== TESTIMONIAL 2 ====================--
-                        <div class="swiper-slide">
-                            <div class="testimonial__content">
-                                <div class="testimonial__data">
-                                    <div class="testimonial__header">
-                                        <img src="assets/img/testimonial2.jpg" alt="" class="testimonial__img">
-
-                                        <div>
-                                            <h3 class="testimonial__name">Jon Karpenter</h3>
-                                            <span class="testimonial__client">Client</span>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                    </div>
-                                </div>
-
-                                <p class="testimonial__description">
-                                    I get a good impression, I carry out my project with all the possible quality and attention and support 24 hours a day.
-                                </p>
-                            </div>
-                        </div>
-                        <!--==================== TESTIMONIAL 3 ====================--
-                        <div class="swiper-slide">
-                            <div class="testimonial__content">
-                                <div class="testimonial__data">
-                                    <div class="testimonial__header">
-                                        <img src="assets/img/testimonial3.jpg" alt="" class="testimonial__img">
-
-                                        <div>
-                                            <h3 class="testimonial__name">Ian McAllen</h3>
-                                            <span class="testimonial__client">Client</span>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                        <i class="bx bxs-star testimonial__icon-star"></i>
-                                    </div>
-                                </div>
-
-                                <p class="testimonial__description">
-                                    I get a good impression, I carry out my project with all the possible quality and attention and support 24 hours a day.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-
-            </section> -->
-
-            <!--==================== CONTACT ME ====================-->
-            <section class="contact section" id="contact">
-
-                <h2 class="section__title">Contactame</h2>
-                <!-- <span class="section__subtitle">Get in touch</span> -->
-
-                <div class="contact__container container ">
-                    <div>
-                        <!-- <div class="contact__information">
-                            <i class="bx bx-phone contact__icon"></i>
-
-                            <div>
-                                <h3 class="contact__title">Call Me</h3>
-                                <span class="contact__subtitle">999-777-666</span>
-                            </div>
-                        </div> -->
-                        <div class="contact__information">
-                            <i class="bx bx-mail-send contact__icon"></i>
-
-                            <div>
-                                <h3 class="contact__title">E-mail</h3>
-                                <span class="contact__subtitle">andres.z.jimenez15@gmail.com</span>
-                            </div>
-                        </div>
-                        <div class="contact__information">
-                            <i class="bx bx-map contact__icon"></i>
-
-                            <div>
-                                <h3 class="contact__title">Address</h3>
-                                <span class="contact__subtitle">Guerrero, Mexico</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- <form action="" class="contact__form grid">
-                        <div class="contact__inputs grid">
-                            <div class="contact__content">
-                                <label for="name" class="contact__label">Name</label>
-                                <input type="name" class="contact__input">
-                            </div>
-                            <div class="contact__content">
-                                <label for="email" class="contact__label">Email</label>
-                                <input type="email" class="contact__input">
-                            </div>
-                        </div>
-                        <div class="contact__content">
-                            <label for="proyect" class="contact__label">Project</label>
-                            <input type="text" class="contact__input">
-                        </div>
-                        <div class="contact__content">
-                            <label for="message" class="contact__label">Message</label>
-                            <textarea name="" id="" cols="0" rows="7" class="contact__input"></textarea>
-                        </div>
-                        <div>
-                            <a href="#" class="button button--flex">
-                                Send Message
-                                <i class='bx bx-send project__icon button__icon'></i>
-                            </a>
-                        </div>
-                    </form> -->
-
-                </div>
-            </section>
-        </main>
-
-        <!--==================== FOOTER ====================-->
-        <footer class="footer">
-            
-            <div class="footer__bg">
-                <div class="footer__container container grid">
-                    <div>
-                        <h1 class="footer__title">Andres</h1>
-                        <span class="footer__subtitle">FullStack Developer</span>
-                    </div>
-
-                    <ul class="footer__links">
-                        <li><a href="#services" class="footer__link">Servicios</a></li>
-                        <li><a href="#portfolio" class="footer__link">Portafolio</a></li>
-                        <li><a href="#contact" class="footer__link">Contactame</a></li>
-                    </ul>
-
-                    <div class="footer__socials">
-                        <a href="https://www.facebook.com/andres.z.jimenez" target="_blank" class="footer__social">
-                            <i class='bx bxl-facebook'></i>
-                        </a>
-                        <a href="https://www.instagram.com/zair_jimru/" target="_blank" class="footer__social">
-                            <i class='bx bxl-instagram' ></i>
-                        </a>
-                        <a href="https://twitter.com/ZairJirue?t=5QLfHm_lnNQaoDyGIRD6Mw&s=09" target="_blank" class="footer__social">
-                            <i class='bx bxl-twitter' ></i>
-                        </a>
-                    </div>
-                </div>
-
-                <p class="footer__copy">&#169; Zair Rueda, All right reserved</p>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrés Zair Jiménez Rueda · Full Stack Senior</title>
+    <meta name="description" content="Desarrollador Full Stack Senior con más de 5 años de experiencia en PHP/Laravel, React, Node.js y AWS. Arquitecturas escalables, modernización de sistemas legacy y liderazgo técnico.">
+    <meta name="theme-color" content="#f5ede3">
+
+    <!--==================== OPEN GRAPH ====================-->
+    <meta property="og:title" content="Andrés Zair Jiménez Rueda · Full Stack Senior">
+    <meta property="og:description" content="PHP/Laravel · React · Node.js · AWS — soluciones en producción con impacto real.">
+    <meta property="og:image" content="assets/img/portfolio4.png">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff7a1a'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='700' font-size='34' fill='%23fff'%3EZ%3C/text%3E%3C/svg%3E">
+
+    <!--==================== FONTS & ICONS ====================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Aplica el tema guardado antes de pintar para evitar parpadeo -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+    <!--==================== PRELOADER ====================-->
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader__box">
+            <span class="loader__logo">Z</span>
+            <span class="loader__count" id="loader-count">000</span>
+            <span class="loader__bar"><span id="loader-bar"></span></span>
+        </div>
+    </div>
+
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav">
+            <a href="#home" class="nav__logo" aria-label="Inicio">
+                <span class="nav__logo-mark">Z</span>
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list" id="nav-list">
+                    <span class="nav__indicator" id="nav-indicator"></span>
+                    <li><a href="#about" class="nav__link">Sobre mí</a></li>
+                    <li><a href="#experience" class="nav__link">Experiencia</a></li>
+                    <li><a href="#projects" class="nav__link">Proyectos</a></li>
+                    <li><a href="#stack" class="nav__link">Stack</a></li>
+                    <li><a href="#contact" class="nav__link">Contacto</a></li>
+                </ul>
             </div>
 
-        </footer>
-        
-        <!--==================== SCROLL TOP ====================-->
-        
-        <a href="#" class="scrollup" id="scroll-up">
-            <i class='bx bxs-chevron-up scrollup__icon'></i>
-            
-        </a>
+            <div class="nav__actions">
+                <a href="#contact" class="button button--accent nav__cta magnetic">Hablemos</a>
+                <button class="icon-button" id="theme-button" aria-label="Cambiar tema">
+                    <i class='bx bx-moon'></i>
+                </button>
+                <button class="icon-button nav__toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+                    <i class='bx bx-menu'></i>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-        <!--==================== SWIPER JS ====================-->
-        <script src="assets/js/swiper-bundle.min.js"></script>
+    <main>
+        <!--==================== HERO ====================-->
+        <section class="hero" id="home">
+            <canvas class="hero__canvas" id="hero-canvas" aria-label="Escena 3D de un escritorio de desarrollador"></canvas>
 
-        <!--==================== MAIN JS ====================-->
-        <script src="assets/js/main.js"></script>
-    </body>
+            <div class="hero__content container">
+                <p class="hero__hello reveal">Hola, soy</p>
+                <h1 class="hero__title">
+                    <span class="split">Andrés</span>
+                    <span class="split">Zair</span>
+                </h1>
+                <span class="tag tag--navy hero__tag reveal">FULL STACK SR</span>
+
+                <p class="hero__description reveal">
+                    Construyo sistemas en producción que <strong>ahorran dinero</strong>, eliminan errores
+                    y escalan: de sistemas legacy en PHP a plataformas modernas con Laravel, React, Node.js y AWS.
+                </p>
+
+                <div class="hero__buttons reveal">
+                    <a href="#projects" class="button button--accent magnetic">
+                        Ver proyectos <i class='bx bx-right-arrow-alt'></i>
+                    </a>
+                    <a href="assets/pdf/CV-Zair.pdf" download class="button button--ghost magnetic">
+                        Descargar CV <i class='bx bx-download'></i>
+                    </a>
+                </div>
+
+                <ul class="hero__meta reveal">
+                    <li><i class='bx bx-map'></i> Acapulco, México</li>
+                    <li><span class="dot dot--live"></span> Disponible para proyectos</li>
+                </ul>
+            </div>
+
+            <a href="#about" class="hero__scroll" aria-label="Ir a la siguiente sección">
+                <span class="hero__mouse"><span></span></span>
+                <i class='bx bx-chevron-down'></i>
+            </a>
+        </section>
+
+        <!--==================== ABOUT ====================-->
+        <section class="about section section--holo" id="about">
+            <div class="holo-grid" aria-hidden="true"></div>
+
+            <div class="container about__container">
+                <div class="about__photo reveal">
+                    <div class="holo-card">
+                        <img src="assets/img/perfil.png" alt="Fotografía de Andrés Zair Jiménez Rueda" loading="lazy">
+                        <span class="holo-card__scan" aria-hidden="true"></span>
+                    </div>
+                    <div class="holo-label">
+                        <strong>Andrés Zair</strong>
+                        <span><i class='bx bx-map'></i> Acapulco, Gro.</span>
+                    </div>
+                    <div class="holo-base" aria-hidden="true"><span>005</span></div>
+                </div>
+
+                <div class="about__data">
+                    <span class="tag tag--orange reveal">SOBRE MÍ</span>
+                    <h2 class="section__title reveal">Código con impacto en el negocio</h2>
+                    <p class="about__text reveal">
+                        Soy Desarrollador Full Stack Senior con <strong>más de 5 años</strong> construyendo soluciones
+                        tecnológicas en entornos de producción reales. Me especializo en arquitecturas escalables,
+                        modernización de sistemas legacy y liderazgo técnico de equipos ágiles.
+                    </p>
+                    <p class="about__text reveal">
+                        Combino visión estratégica con ejecución técnica precisa: cada desarrollo tiene que mover
+                        una métrica del negocio, ya sea dirigiendo un equipo o resolviendo la tarea crítica yo mismo.
+                    </p>
+
+                    <div class="stats">
+                        <div class="stat reveal">
+                            <span class="stat__value"><span data-count="5">0</span>+</span>
+                            <span class="stat__label">años en producción</span>
+                        </div>
+                        <div class="stat reveal">
+                            <span class="stat__value">-<span data-count="35">0</span>%</span>
+                            <span class="stat__label">errores operativos</span>
+                        </div>
+                        <div class="stat reveal">
+                            <span class="stat__value">+<span data-count="50">0</span>%</span>
+                            <span class="stat__label">velocidad de procesamiento</span>
+                        </div>
+                        <div class="stat reveal">
+                            <span class="stat__value"><span data-count="3">0</span></span>
+                            <span class="stat__label">sistemas legacy modernizados</span>
+                        </div>
+                    </div>
+
+                    <ul class="about__chips reveal">
+                        <li><i class='bx bx-code-block'></i> Laravel · React · Node.js</li>
+                        <li><i class='bx bx-cloud'></i> AWS · Docker · CI/CD</li>
+                        <li><i class='bx bx-group'></i> Liderazgo Scrum</li>
+                        <li><i class='bx bx-world'></i> Inglés B2</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== EXPERIENCE ====================-->
+        <section class="experience section" id="experience">
+            <div class="container">
+                <header class="section__header">
+                    <span class="tag tag--navy reveal">TRAYECTORIA</span>
+                    <h2 class="section__title reveal">Experiencia</h2>
+                </header>
+
+                <div class="timeline" id="timeline">
+                    <span class="timeline__line"><span class="timeline__fill" id="timeline-fill"></span></span>
+
+                    <!-- NAVIOMAR -->
+                    <article class="job reveal">
+                        <span class="job__dot"></span>
+                        <div class="job__card">
+                            <div class="job__head">
+                                <div>
+                                    <h3 class="job__company">NAVIOMAR</h3>
+                                    <p class="job__role">Desarrollador Full Stack Senior</p>
+                                    <p class="job__place">Logística naval y transporte de carga · Acapulco, Gro.</p>
+                                </div>
+                                <span class="job__date"><span class="dot dot--live"></span> May 2022 — Actualidad</span>
+                            </div>
+
+                            <ul class="job__list">
+                                <li>
+                                    <strong>Liderazgo técnico:</strong> dirigí un equipo de 4 desarrolladores en la creación de un
+                                    sistema de gestión logística integrado, reduciendo un <mark>35%</mark> los errores operativos
+                                    mediante automatización con Laravel y React.
+                                </li>
+                                <li>
+                                    <strong>Rescate de proyecto crítico:</strong> detecté que un proveedor externo no estaba alineado
+                                    con la operación real; asumí el proyecto, lo replanteé desde cero y lo entregué, evitando una
+                                    pérdida de <mark>miles de pesos</mark> en honorarios y retrabajos.
+                                </li>
+                                <li>
+                                    <strong>Migración estratégica:</strong> modernicé <mark>3 sistemas legacy</mark>
+                                    (PHP 5.3 → PHP 8.3), mejorando seguridad, rendimiento y mantenibilidad.
+                                </li>
+                                <li>
+                                    <strong>Integración de APIs:</strong> diseñé una API REST para sincronizar datos con socios
+                                    externos, optimizando el tiempo de procesamiento en un <mark>50%</mark>.
+                                </li>
+                                <li>
+                                    <strong>DevOps:</strong> implementé pipelines CI/CD con Docker y desplegué servicios en
+                                    AWS (EC2 + S3), reduciendo tiempos de entrega.
+                                </li>
+                            </ul>
+
+                            <ul class="chips">
+                                <li>PHP 5–8.3</li><li>Laravel 9/10</li><li>React 18</li><li>Node.js</li>
+                                <li>PostgreSQL</li><li>AWS S3/EC2</li><li>Docker</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- FREELANCE -->
+                    <article class="job reveal">
+                        <span class="job__dot"></span>
+                        <div class="job__card">
+                            <div class="job__head">
+                                <div>
+                                    <h3 class="job__company">Freelance</h3>
+                                    <p class="job__role">Desarrollador Web Full Stack</p>
+                                    <p class="job__place">Proyectos para clientes y pymes</p>
+                                </div>
+                                <span class="job__date">Ene 2021 — May 2022</span>
+                            </div>
+
+                            <ul class="job__list">
+                                <li>
+                                    <strong>MLimpac:</strong> landing page con sistema de envío automatizado de correos (Nodemailer).
+                                </li>
+                                <li>
+                                    <strong>Sistema Veterinario:</strong> aplicación para administrar citas médicas con agenda visual.
+                                </li>
+                            </ul>
+
+                            <ul class="chips">
+                                <li>HTML5</li><li>SASS</li><li>JavaScript</li><li>Gulp</li><li>React</li><li>Tailwind CSS</li><li>Node.js</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- EDUCATION -->
+                    <article class="job reveal">
+                        <span class="job__dot job__dot--study"></span>
+                        <div class="job__card job__card--soft">
+                            <div class="job__head">
+                                <div>
+                                    <h3 class="job__company">Formación</h3>
+                                    <p class="job__role">Educación y certificaciones</p>
+                                </div>
+                            </div>
+                            <ul class="edu">
+                                <li>
+                                    <span class="edu__year">2023</span>
+                                    <div>
+                                        <strong>Arquitectura de Software Escalable</strong>
+                                        <p>Basado en <em>Designing Data-Intensive Applications</em> (M. Kleppmann): sistemas distribuidos, consistencia y tolerancia a fallos.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="edu__year">2019</span>
+                                    <div>
+                                        <strong>Desarrollo Web Full Stack · Udemy</strong>
+                                        <p>PHP, JavaScript, SQL y frameworks modernos.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="edu__year">2014–17</span>
+                                    <div>
+                                        <strong>Bachillerato Físico-Matemáticas</strong>
+                                        <p>CETMAR (Centro de Estudios Tecnológicos del Mar), Acapulco.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== PROJECTS ====================-->
+        <section class="projects section" id="projects">
+            <div class="container">
+                <header class="section__header section__header--row">
+                    <div>
+                        <span class="tag tag--navy reveal">SELECCIONADOS</span>
+                        <h2 class="section__title reveal">Proyectos</h2>
+                    </div>
+
+                    <div class="filters reveal" role="tablist" aria-label="Filtrar proyectos">
+                        <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
+                        <button class="filter" data-filter="prod" role="tab" aria-selected="false">En producción</button>
+                        <button class="filter" data-filter="dev" role="tab" aria-selected="false">En desarrollo</button>
+                        <button class="filter" data-filter="oss" role="tab" aria-selected="false">Open source</button>
+                    </div>
+                </header>
+
+                <div class="projects__grid" id="projects-grid">
+
+                    <!-- TICKETS -->
+                    <article class="project reveal" data-cat="prod" data-project="tickets" tabindex="0">
+                        <div class="project__cover project__cover--tickets tilt">
+                            <div class="mock mock--tickets" aria-hidden="true">
+                                <div class="mock__bar"><i></i><i></i><i></i></div>
+                                <div class="mock__body">
+                                    <aside class="mock__side"><b></b><b></b><b></b><b></b></aside>
+                                    <div class="mock__main">
+                                        <div class="mock__row"><span class="pill pill--green">Abierto</span><span class="line"></span></div>
+                                        <div class="mock__row"><span class="pill pill--amber">En curso</span><span class="line"></span></div>
+                                        <div class="mock__row"><span class="pill pill--blue">Resuelto</span><span class="line"></span></div>
+                                        <div class="mock__row"><span class="pill pill--green">Abierto</span><span class="line"></span></div>
+                                        <div class="mock__toast"><i class='bx bx-bell'></i> Nuevo ticket en tiempo real</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="badge badge--live"><span class="dot dot--live"></span> En producción</span>
+                        </div>
+                        <div class="project__info">
+                            <div>
+                                <h3 class="project__title">Sistema de Tickets</h3>
+                                <p class="project__subtitle">Reemplazó un servicio de pago → costo recurrente eliminado</p>
+                            </div>
+                            <span class="project__year">2024</span>
+                        </div>
+                        <ul class="chips chips--sm"><li>NestJS</li><li>Next.js 14</li><li>Socket.io</li><li>AWS S3</li></ul>
+                    </article>
+
+                    <!-- PRESTAMOS -->
+                    <article class="project reveal" data-cat="dev" data-project="loans" tabindex="0">
+                        <div class="project__cover tilt">
+                            <img src="assets/img/portfolio4.png" alt="Pantalla principal de Presta+, sistema de gestión de préstamos" loading="lazy">
+                            <span class="badge badge--dev">En desarrollo</span>
+                        </div>
+                        <div class="project__info">
+                            <div>
+                                <h3 class="project__title">Presta+ · Gestión de Préstamos</h3>
+                                <p class="project__subtitle">Plataforma escalable con documentos seguros en S3</p>
+                            </div>
+                            <span class="project__year">2025</span>
+                        </div>
+                        <ul class="chips chips--sm"><li>Next.js 15</li><li>Prisma</li><li>PostgreSQL</li><li>Jest</li></ul>
+                    </article>
+
+                    <!-- CFDI -->
+                    <article class="project reveal" data-cat="dev" data-project="cfdi" tabindex="0">
+                        <div class="project__cover project__cover--cfdi tilt">
+                            <div class="mock mock--cfdi" aria-hidden="true">
+                                <div class="mock__bar"><i></i><i></i><i></i></div>
+                                <div class="mock__body mock__body--col">
+                                    <div class="kpis"><span><em>Facturas</em><b>1,284</b></span><span><em>Timbradas</em><b>98.7%</b></span><span><em>Clientes</em><b>342</b></span></div>
+                                    <div class="bars"><i style="--h:40%"></i><i style="--h:65%"></i><i style="--h:50%"></i><i style="--h:80%"></i><i style="--h:70%"></i><i style="--h:95%"></i><i style="--h:60%"></i></div>
+                                    <div class="xml">&lt;cfdi:Comprobante Version="4.0" …/&gt;</div>
+                                </div>
+                            </div>
+                            <span class="badge badge--dev">En desarrollo</span>
+                        </div>
+                        <div class="project__info">
+                            <div>
+                                <h3 class="project__title">Facturación Electrónica CFDI 4.0</h3>
+                                <p class="project__subtitle">Alternativa open source a CONTPAQi con timbrado vía PAC</p>
+                            </div>
+                            <span class="project__year">2025</span>
+                        </div>
+                        <ul class="chips chips--sm"><li>Fastify</li><li>Next.js 14</li><li>Zod</li><li>shadcn/ui</li></ul>
+                    </article>
+
+                    <!-- VETERINARIA -->
+                    <article class="project reveal" data-cat="prod oss" data-project="vet" tabindex="0">
+                        <div class="project__cover tilt">
+                            <img src="assets/img/portfolio2.png" alt="Sistema de citas para veterinaria" loading="lazy">
+                            <span class="badge badge--live"><span class="dot dot--live"></span> En vivo</span>
+                        </div>
+                        <div class="project__info">
+                            <div>
+                                <h3 class="project__title">Sistema Veterinario</h3>
+                                <p class="project__subtitle">Agenda de citas y registro de pacientes</p>
+                            </div>
+                            <span class="project__year">2022</span>
+                        </div>
+                        <ul class="chips chips--sm"><li>React</li><li>Tailwind CSS</li><li>Vercel</li></ul>
+                    </article>
+
+                    <!-- CRYPTO -->
+                    <article class="project reveal" data-cat="prod oss" data-project="crypto" tabindex="0">
+                        <div class="project__cover tilt">
+                            <img src="assets/img/portfolio3.png" alt="Cotizador de criptomonedas" loading="lazy">
+                            <span class="badge badge--live"><span class="dot dot--live"></span> En vivo</span>
+                        </div>
+                        <div class="project__info">
+                            <div>
+                                <h3 class="project__title">Crypto Checker</h3>
+                                <p class="project__subtitle">Cotización de criptomonedas en tiempo real</p>
+                            </div>
+                            <span class="project__year">2022</span>
+                        </div>
+                        <ul class="chips chips--sm"><li>React</li><li>Hooks</li><li>API REST</li></ul>
+                    </article>
+
+                    <!-- REAL STATE -->
+                    <article class="project reveal" data-cat="oss" data-project="realstate" tabindex="0">
+                        <div class="project__cover tilt">
+                            <img src="assets/img/portfolio1.png" alt="Plataforma inmobiliaria" loading="lazy">
+                            <span class="badge badge--oss"><i class='bx bxl-github'></i> Open source</span>
+                        </div>
+                        <div class="project__info">
+                            <div>
+                                <h3 class="project__title">Plataforma Inmobiliaria</h3>
+                                <p class="project__subtitle">Panel de administración, vendedores y blog dinámico</p>
+                            </div>
+                            <span class="project__year">2022</span>
+                        </div>
+                        <ul class="chips chips--sm"><li>PHP MVC</li><li>MySQL</li><li>SASS</li><li>Gulp</li></ul>
+                    </article>
+                </div>
+
+                <a href="https://github.com/ZairRueda" target="_blank" rel="noopener" class="projects__more reveal magnetic">
+                    <i class='bx bxl-github'></i> Más proyectos en GitHub <i class='bx bx-right-arrow-alt'></i>
+                </a>
+            </div>
+        </section>
+
+        <!--==================== STACK ====================-->
+        <section class="stack section" id="stack">
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee__track">
+                    <span>Laravel</span><span>React</span><span>Node.js</span><span>TypeScript</span><span>Next.js</span><span>PostgreSQL</span><span>AWS</span><span>Docker</span><span>NestJS</span><span>Prisma</span>
+                    <span>Laravel</span><span>React</span><span>Node.js</span><span>TypeScript</span><span>Next.js</span><span>PostgreSQL</span><span>AWS</span><span>Docker</span><span>NestJS</span><span>Prisma</span>
+                </div>
+            </div>
+
+            <div class="container">
+                <header class="section__header">
+                    <span class="tag tag--orange reveal">HERRAMIENTAS</span>
+                    <h2 class="section__title reveal">Stack tecnológico</h2>
+                </header>
+
+                <div class="stack__grid">
+                    <div class="stack__card reveal">
+                        <i class='bx bx-server stack__icon'></i>
+                        <h3>Backend</h3>
+                        <ul class="chips"><li>PHP 5–8.3</li><li>Laravel 9/10/11</li><li>Node.js</li><li>NestJS</li><li>Fastify</li><li>Python</li><li>C# / .NET</li><li>REST</li><li>GraphQL</li></ul>
+                    </div>
+                    <div class="stack__card reveal">
+                        <i class='bx bx-palette stack__icon'></i>
+                        <h3>Frontend</h3>
+                        <ul class="chips"><li>React 18/19</li><li>TypeScript</li><li>Next.js 15</li><li>JavaScript ES2024</li><li>Tailwind CSS</li><li>shadcn/ui</li><li>Zustand</li><li>React Query</li></ul>
+                    </div>
+                    <div class="stack__card reveal">
+                        <i class='bx bx-data stack__icon'></i>
+                        <h3>Bases de datos</h3>
+                        <ul class="chips"><li>PostgreSQL</li><li>MySQL</li><li>MongoDB</li><li>Prisma ORM</li></ul>
+                    </div>
+                    <div class="stack__card reveal">
+                        <i class='bx bx-cloud-upload stack__icon'></i>
+                        <h3>DevOps &amp; Cloud</h3>
+                        <ul class="chips"><li>AWS S3 / EC2</li><li>Docker</li><li>CI/CD</li><li>Nginx</li><li>Linux</li><li>Railway</li><li>Vercel</li></ul>
+                    </div>
+                    <div class="stack__card reveal">
+                        <i class='bx bx-wrench stack__icon'></i>
+                        <h3>Herramientas</h3>
+                        <ul class="chips"><li>Git / GitHub</li><li>Jira</li><li>Jest</li><li>Socket.IO</li><li>Swagger</li><li>Zod</li><li>Nodemailer</li></ul>
+                    </div>
+                    <div class="stack__card stack__card--accent reveal">
+                        <i class='bx bx-conversation stack__icon'></i>
+                        <h3>Idiomas</h3>
+                        <ul class="langs">
+                            <li><span>Español</span><span class="langs__bar"><i style="--w:100%"></i></span><em>Nativo</em></li>
+                            <li><span>Inglés</span><span class="langs__bar"><i style="--w:72%"></i></span><em>B2</em></li>
+                        </ul>
+                        <p class="stack__note">Lectura técnica fluida, documentación y reuniones en inglés.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== CONTACT ====================-->
+        <section class="contact section" id="contact">
+            <div class="container">
+                <div class="contact__card reveal">
+                    <div class="contact__blob" aria-hidden="true"></div>
+                    <span class="tag tag--navy">¿NUEVO PROYECTO?</span>
+                    <h2 class="contact__title">
+                        <span class="split">¡Trabajemos</span>
+                        <span class="split">juntos!</span>
+                    </h2>
+                    <p class="contact__text">
+                        ¿Necesitas modernizar un sistema, lanzar un producto o reforzar a tu equipo?
+                        Escríbeme y platicamos cómo puedo ayudarte.
+                    </p>
+
+                    <div class="contact__actions">
+                        <a href="mailto:andres.z.jimenez15@gmail.com" class="button button--accent button--lg magnetic">
+                            <i class='bx bx-envelope'></i> andres.z.jimenez15@gmail.com
+                        </a>
+                        <button class="icon-button icon-button--lg" id="copy-email" data-email="andres.z.jimenez15@gmail.com" aria-label="Copiar correo">
+                            <i class='bx bx-copy'></i>
+                        </button>
+                    </div>
+
+                    <div class="contact__socials">
+                        <a href="https://www.linkedin.com/in/andres-zair-jimenez-rueda-029262174/" target="_blank" rel="noopener" class="social magnetic" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+                        <a href="https://github.com/ZairRueda" target="_blank" rel="noopener" class="social magnetic" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+                        <a href="assets/pdf/CV-Zair.pdf" download class="social magnetic" aria-label="Descargar CV"><i class='bx bx-file'></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer">
+        <div class="container footer__container">
+            <a href="#home" class="icon-button" aria-label="Volver arriba"><i class='bx bx-up-arrow-alt'></i></a>
+            <p>© <span id="year">2026</span> Andrés Zair Jiménez Rueda · Hecho con HTML, CSS, JS y Three.js</p>
+        </div>
+    </footer>
+
+    <!--==================== PROJECT MODAL ====================-->
+    <dialog class="modal" id="project-modal" aria-labelledby="modal-title">
+        <button class="icon-button modal__close" id="modal-close" aria-label="Cerrar"><i class='bx bx-x'></i></button>
+        <div class="modal__content" id="modal-content"></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!--==================== SCRIPTS ====================-->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script src="assets/js/main.js" defer></script>
+    <script type="module" src="assets/js/scene.js"></script>
+</body>
 </html>
