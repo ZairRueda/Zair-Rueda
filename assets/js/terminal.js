@@ -37,6 +37,7 @@
                     ['status', L('estado en vivo de los servidores', 'live server status')],
                     ['contact', L('cómo contactarme', 'how to reach me')],
                     ['cv', L('descarga mi CV', 'downloads my CV')],
+                    ['xray', L('cómo está hecha la escena 3D', 'how the 3D scene is made')],
                     ['time', L('hora en Acapulco', 'time in Acapulco')],
                     ['theme', L('cambia claro / oscuro', 'toggles light / dark')],
                     ['lang es|en', L('cambia el idioma', 'switches language')],
@@ -75,7 +76,7 @@
                 setTimeout(() => {
                     term.close()
                     if (window.deskScene && ['fiskality', 'presto', 'sgse'].includes(key)) {
-                        document.getElementById('home').scrollIntoView({ behavior: 'smooth' })
+                        window.smoothScrollTo('#home')
                         setTimeout(() => window.deskScene.activate(key), 500)
                     } else window.openProject(key)
                 }, 350)
@@ -130,6 +131,18 @@
         time: {
             alias: ['hora', 'date'],
             run: () => [`🕒 ${window.localTime()} ${L('en Acapulco, México', 'in Acapulco, Mexico')}`]
+        },
+        xray: {
+            alias: ['rayosx', 'rayos'],
+            run: () => {
+                if (!window.deskScene) return [L('La escena 3D no está disponible en este navegador.', 'The 3D scene is not available in this browser.')]
+                setTimeout(() => {
+                    term.close()
+                    window.smoothScrollTo('#home')
+                    window.deskScene.xray()
+                }, 300)
+                return [L('Activando rayos X…', 'Toggling X-ray…')]
+            }
         },
         theme: {
             alias: ['tema'],

@@ -7,11 +7,41 @@
     <meta name="description" content="Desarrollador Full Stack Senior con más de 5 años de experiencia en PHP/Laravel, React, Node.js y AWS. Arquitecturas escalables, modernización de sistemas legacy y liderazgo técnico.">
     <meta name="theme-color" content="#f3f5f2">
 
-    <!--==================== OPEN GRAPH ====================-->
-    <meta property="og:title" content="Andrés Zair Jiménez Rueda · Full Stack Senior">
-    <meta property="og:description" content="PHP/Laravel · React · Node.js · AWS — soluciones en producción con impacto real.">
-    <meta property="og:image" content="assets/img/fiskality.webp">
+    <link rel="canonical" href="https://zairrueda.github.io/Zair-Rueda/">
+    <link rel="alternate" hreflang="es" href="https://zairrueda.github.io/Zair-Rueda/">
+    <link rel="alternate" hreflang="en" href="https://zairrueda.github.io/Zair-Rueda/">
+
+    <!--==================== OPEN GRAPH / TWITTER ====================-->
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zairrueda.github.io/Zair-Rueda/">
+    <meta property="og:title" content="Andrés Zair Jiménez Rueda · Full Stack Senior">
+    <meta property="og:description" content="Sistemas en producción con Laravel, React, Node.js y AWS: Fiskality, Presto+ y SGSE. Explora el escritorio 3D.">
+    <meta property="og:image" content="https://zairrueda.github.io/Zair-Rueda/assets/img/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Andrés Zair Jiménez Rueda · Full Stack Senior">
+    <meta name="twitter:description" content="Sistemas en producción con Laravel, React, Node.js y AWS. Explora el escritorio 3D.">
+    <meta name="twitter:image" content="https://zairrueda.github.io/Zair-Rueda/assets/img/og.jpg">
+
+    <!--==================== DATOS ESTRUCTURADOS ====================-->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Andrés Zair Jiménez Rueda",
+        "jobTitle": "Desarrollador Full Stack Senior",
+        "url": "https://zairrueda.github.io/Zair-Rueda/",
+        "image": "https://zairrueda.github.io/Zair-Rueda/assets/img/zair.webp",
+        "email": "mailto:andres.z.jimenez15@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Acapulco", "addressRegion": "Guerrero", "addressCountry": "MX" },
+        "knowsAbout": ["Laravel", "PHP", "React", "Next.js", "Node.js", "NestJS", "TypeScript", "PostgreSQL", "AWS", "Docker"],
+        "knowsLanguage": ["es", "en"],
+        "sameAs": ["https://github.com/ZairRueda", "https://www.linkedin.com/in/andres-zair-jimenez-rueda-029262174/"]
+    }
+    </script>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2214%22%20fill%3D%22%230e1c1f%22/%3E%3Cpath%20d%3D%22M13.5%2013L34%2016L14.5%2033.5%22%20fill%3D%22none%22%20stroke%3D%22%23f3f5f2%22%20stroke-width%3D%225.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M14.5%2035.5H34.5%22%20stroke%3D%22%23ff5f3a%22%20stroke-width%3D%225.5%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
 
@@ -94,6 +124,8 @@
         <section class="hero" id="home">
             <canvas class="hero__canvas" id="hero-canvas" aria-label="Escena 3D de un escritorio de desarrollador"></canvas>
 
+            <div class="xray-labels" id="xray-labels" aria-live="polite"></div>
+
             <div class="desk-nav" role="group" aria-label="Explora el escritorio">
                 <p class="desk-nav__hint" data-i18n="desk.hint"><i class='bx bx-pointer'></i> Haz clic en el escritorio: todo lo que ves está en producción</p>
                 <div class="desk-nav__buttons">
@@ -102,6 +134,7 @@
                     <button class="desk-btn" data-desk="sgse"><span class="desk-btn__kind">Tablet</span> SGSE <i class='bx bx-lock-alt'></i></button>
                     <button class="desk-btn" data-desk="server"><span class="desk-btn__kind" data-i18n="desk.kind.server">Servidor</span> <span class="desk-status" id="desk-status"><span class="dot"></span> <span id="desk-status-text">…</span></span></button>
                     <button class="desk-btn" data-desk="lamp"><span class="desk-btn__kind" data-i18n="desk.kind.lamp">Lámpara</span> <span id="desk-time">--:--</span> · Acapulco</button>
+                    <button class="desk-btn desk-btn--xray" data-desk="xray" aria-pressed="false"><i class='bx bx-scan'></i> <span data-i18n="desk.kind.xray">Rayos X: cómo está hecho</span></button>
                 </div>
             </div>
 
@@ -535,13 +568,13 @@
     </footer>
 
     <!--==================== PROJECT MODAL ====================-->
-    <dialog class="modal" id="project-modal" aria-labelledby="modal-title">
+    <dialog class="modal" id="project-modal" aria-labelledby="modal-title" data-lenis-prevent>
         <button class="icon-button modal__close" id="modal-close" aria-label="Cerrar"><i class='bx bx-x'></i></button>
         <div class="modal__content" id="modal-content"></div>
     </dialog>
 
     <!--==================== TERMINAL ====================-->
-    <dialog class="term" id="terminal" aria-label="Terminal">
+    <dialog class="term" id="terminal" aria-label="Terminal" data-lenis-prevent>
         <div class="term__bar">
             <span class="term__dots"><i></i><i></i><i></i></span>
             <span class="term__title">zair@acapulco: ~</span>
@@ -566,6 +599,7 @@
             }
         }
     </script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
     <script src="assets/js/i18n.js" defer></script>
     <script src="assets/js/main.js" defer></script>
     <script src="assets/js/terminal.js" defer></script>

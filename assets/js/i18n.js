@@ -77,6 +77,7 @@
         "footer.made": "© <span id=\"year\">2026</span> Andrés Zair Jiménez Rueda · Built with HTML, CSS, JS and Three.js",
         "kinetic.row": "<span>In production</span><span>Online</span><span>In production</span><span>Online</span><span>In production</span><span>Online</span><span>In production</span><span>Online</span>",
         "footer.hint": "<kbd>/</kbd> opens the terminal",
+        "desk.kind.xray": "X-ray: how it's made",
         "desk.kind.monitor": "Monitor",
         "desk.kind.monitor2": "Monitor",
         "desk.kind.server": "Server",
@@ -85,6 +86,18 @@
 
     const strings = {
         "es": {
+            "xray.fiskality": "<b>Fiskality</b> Next.js · Fastify · PostgreSQL RLS · BullMQ",
+            "xray.presto": "<b>Presto+</b> Next.js 15 · Express · Prisma",
+            "xray.sgse": "<b>SGSE</b> NestJS · Socket.io · QR",
+            "xray.server": "<b>VPS propio</b> Docker · Caddy · CI/CD",
+            "xray.board": "<b>Stack</b> Laravel · React · Node.js · AWS",
+            "xray.lamp": "<b>Hora real</b> Intl API · America/Mexico_City",
+            "xray.scene": "<b>Esta escena</b> Three.js · {meshes} objetos · {tris} triángulos · 0 modelos importados",
+            "case.problem": "El problema",
+            "case.solution": "La solución",
+            "case.results": "Resultados",
+            "case.arch": "Arquitectura",
+            "case.features": "Qué incluye",
                 "desk.online": "En línea",
                 "desk.offline": "Sin respuesta",
                 "desk.checking": "Verificando…",
@@ -108,6 +121,18 @@
                 "theme.switch": "Cambiar tema"
         },
         "en": {
+            "xray.fiskality": "<b>Fiskality</b> Next.js · Fastify · PostgreSQL RLS · BullMQ",
+            "xray.presto": "<b>Presto+</b> Next.js 15 · Express · Prisma",
+            "xray.sgse": "<b>SGSE</b> NestJS · Socket.io · QR",
+            "xray.server": "<b>Own VPS</b> Docker · Caddy · CI/CD",
+            "xray.board": "<b>Stack</b> Laravel · React · Node.js · AWS",
+            "xray.lamp": "<b>Real time</b> Intl API · America/Mexico_City",
+            "xray.scene": "<b>This scene</b> Three.js · {meshes} objects · {tris} triangles · 0 imported models",
+            "case.problem": "The problem",
+            "case.solution": "The solution",
+            "case.results": "Results",
+            "case.arch": "Architecture",
+            "case.features": "What it includes",
                 "desk.online": "Online",
                 "desk.offline": "No response",
                 "desk.checking": "Checking…",
@@ -134,6 +159,60 @@
 
     const projects = {
         "fiskality": {
+            "case": {
+                "problem": "Companies and accounting firms use one tool for invoicing, another for accounting and another for payroll, usually desktop software with expensive licenses. Data is entered twice and tax mistakes are costly.",
+                "solution": "A single multi-tenant web platform where the stamped invoice feeds accounting and payroll with no re-entry. Every company is isolated at the database level, and heavy jobs (stamping, PDFs, emails, SAT downloads) run in the background.",
+                "results": [
+                    [
+                        "907",
+                        "automated API tests"
+                    ],
+                    [
+                        "246",
+                        "UI tests"
+                    ],
+                    [
+                        "~5.5 min",
+                        "from push to production (was 18–28)"
+                    ],
+                    [
+                        "95/95",
+                        "probes returned 200 during a deploy"
+                    ]
+                ],
+                "arch": [
+                    [
+                        "Client",
+                        [
+                            "Browser · PWA"
+                        ]
+                    ],
+                    [
+                        "Edge",
+                        [
+                            "Caddy · HTTPS",
+                            "Cloudflare DNS"
+                        ]
+                    ],
+                    [
+                        "Application",
+                        [
+                            "Next.js (web)",
+                            "Fastify (API)",
+                            "BullMQ worker"
+                        ]
+                    ],
+                    [
+                        "Data & services",
+                        [
+                            "PostgreSQL + RLS",
+                            "Redis",
+                            "S3 storage",
+                            "Tax stamping provider"
+                        ]
+                    ]
+                ]
+            },
                 "meta": [
                         "2025 — now",
                         "Multi-tenant SaaS",
@@ -152,6 +231,58 @@
                 ]
         },
         "presto": {
+            "case": {
+                "problem": "Tracking loans in spreadsheets causes mistakes in installments, interest and late fees, payments without receipts and no visibility of the capital lent out.",
+                "solution": "A system that builds the amortization schedule, applies late fees every day with a scheduled job, records payments with a PDF receipt and gathers capital, interest and client reports.",
+                "results": [
+                    [
+                        "2",
+                        "loan types: fixed and express"
+                    ],
+                    [
+                        "Daily",
+                        "automatic late-fee calculation"
+                    ],
+                    [
+                        "5",
+                        "business reports"
+                    ],
+                    [
+                        "CI",
+                        "automatic deploy to VPS"
+                    ]
+                ],
+                "arch": [
+                    [
+                        "Client",
+                        [
+                            "Browser"
+                        ]
+                    ],
+                    [
+                        "Edge",
+                        [
+                            "Caddy · HTTPS"
+                        ]
+                    ],
+                    [
+                        "Application",
+                        [
+                            "Next.js 15",
+                            "Express API",
+                            "Daily late-fee job"
+                        ]
+                    ],
+                    [
+                        "Data",
+                        [
+                            "PostgreSQL",
+                            "Prisma ORM",
+                            "PDF receipts"
+                        ]
+                    ]
+                ]
+            },
                 "title": "Presto+ · Loan Management",
                 "meta": [
                         "2025 — now",
@@ -170,6 +301,59 @@
                 ]
         },
         "sgse": {
+            "case": {
+                "problem": "Security companies track patrols and shifts on paper or chat messages: there is no proof the guard visited each point and no view of the workload.",
+                "solution": "Each guard signs in with the QR on their badge and logs checkpoints by scanning them with the camera. Supervisors see patrols in real time and plan shifts on a calendar.",
+                "results": [
+                    [
+                        "4",
+                        "roles with atomic permissions"
+                    ],
+                    [
+                        "QR",
+                        "badge sign-in and checkpoints"
+                    ],
+                    [
+                        "12/14 h",
+                        "configurable shifts"
+                    ],
+                    [
+                        "Real time",
+                        "with Socket.io"
+                    ]
+                ],
+                "arch": [
+                    [
+                        "Client",
+                        [
+                            "Browser",
+                            "Phone camera"
+                        ]
+                    ],
+                    [
+                        "Edge",
+                        [
+                            "Caddy · HTTPS"
+                        ]
+                    ],
+                    [
+                        "Application",
+                        [
+                            "Next.js 15",
+                            "NestJS API",
+                            "Socket.io"
+                        ]
+                    ],
+                    [
+                        "Data",
+                        [
+                            "PostgreSQL",
+                            "Prisma ORM",
+                            "Site files"
+                        ]
+                    ]
+                ]
+            },
                 "title": "SGSE · Security Management System",
                 "meta": [
                         "2026",

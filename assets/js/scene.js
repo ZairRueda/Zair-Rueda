@@ -343,7 +343,8 @@ lamp.add(mesh(new THREE.CylinderGeometry(.022, .022, .7, 10), mat(COLORS.navy), 
 lamp.add(mesh(new THREE.CylinderGeometry(.022, .022, .5, 10), mat(COLORS.navy), { y: .78, x: .3, rz: -1.1 }))
 const lampHead = mesh(new THREE.ConeGeometry(.13, .22, 20, 1, true), mat(COLORS.navy, { side: THREE.DoubleSide }), { x: .55, y: .82, rz: -.5 })
 lamp.add(lampHead)
-const bulb = mesh(new THREE.SphereGeometry(.05, 12, 12), new THREE.MeshBasicMaterial({ color: '#ffe2b8' }), { x: .58, y: .77, cast: false })
+const bulbMat = new THREE.MeshBasicMaterial({ color: '#ffe2b8' })
+const bulb = mesh(new THREE.SphereGeometry(.05, 12, 12), bulbMat, { x: .58, y: .77, cast: false })
 lamp.add(bulb)
 lamp.position.set(-1.65, TOP, -.25)
 lamp.rotation.y = .5
@@ -552,7 +553,7 @@ const interactives = [
             toast(`💡 ${window.localTime ? window.localTime() : ''} ${t('desk.lampToast')}`)
         }
     },
-    { obj: board, key: 'board', label: () => t('desk.label.board'), action: () => document.getElementById('stack').scrollIntoView({ behavior: 'smooth' }) },
+    { obj: board, key: 'board', label: () => t('desk.label.board'), action: () => window.smoothScrollTo('#stack') },
     {
         obj: duck, key: 'duck', label: () => t('desk.label.duck'),
         action: () => { duckJump = 1; toast(t('desk.duckToast')) }
@@ -603,12 +604,72 @@ window.addEventListener('project:close', () => {
     heroEl.classList.remove('is-focused')
 })
 
-// API para los botones accesibles debajo de la escena
+/*==================== X-RAY MODE ====================*/
+// "Cómo está hecho": la escena pasa a malla de alambre y cada objeto muestra su tecnología
+const xrayLayer = document.getElementById('xray-labels')
+const wireMat = new THREE.MeshBasicMaterial({ color: '#2ec4b0', wireframe: true, transparent: true, opacity: .6, toneMapped: false })
+const wireAccent = new THREE.MeshBasicMaterial({ color: '#ff6f4d', wireframe: true, toneMapped: false })
+const screenPlanes = new Set([monitorLeft.userData.screen, monitorRight.userData.screen, tablet.userData.screen])
+let xray = false
+
+const xrayTargets = [
+    { obj: monitorLeft, y: 2.75, key: 'xray.fiskality' },
+    { obj: monitorRight, y: 2.75, key: 'xray.presto' },
+    { obj: tablet, y: 2.2, key: 'xray.sgse' },
+    { obj: server, y: 1.35, key: 'xray.server' },
+    { obj: board, y: .75, key: 'xray.board' },
+    { obj: chair, y: 1.95, key: 'xray.scene' }
+]
+
+const buildLabels = () => {
+    // Datos reales del render: cuántos objetos y triángulos tiene la escena
+    let meshes = 0
+    world.traverse(o => { if (o.isMesh || o.isInstancedMesh) meshes++ })
+    const tris = renderer.info.render.triangles.toLocaleString()
+    xrayLayer.innerHTML = xrayTargets.map((x, i) => {
+        const text = t(x.key).replace('{meshes}', meshes).replace('{tris}', tris)
+        return `<div class="xray-tag" data-i="${i}">${text}</div>`
+    }).join('')
+}
+
+const setXray = on => {
+    xray = on
+    world.traverse(o => {
+        if (!o.isMesh || screenPlanes.has(o) || o === shadowCatcher) return
+        const original = o.userData.material || o.material
+        if (original.transparent) return
+        o.userData.material = original
+        o.material = on ? (original.color && original.color.getHexString() === 'ff5f3a' ? wireAccent : wireMat) : original
+    })
+    heroEl.classList.toggle('is-xray', on)
+    document.documentElement.classList.toggle('xray-on', on)
+    if (on) buildLabels()
+    else xrayLayer.innerHTML = ''
+    document.querySelectorAll('[data-desk="xray"]').forEach(b => b.setAttribute('aria-pressed', on))
+}
+
+const placeLabels = () => {
+    const r = canvas.getBoundingClientRect(), box = xrayLayer.getBoundingClientRect(), v = new THREE.Vector3()
+    xrayLayer.querySelectorAll('.xray-tag').forEach(el => {
+        const x = xrayTargets[+el.dataset.i]
+        x.obj.getWorldPosition(v)
+        v.y += x.y
+        v.project(camera)
+        const px = r.left - box.left + (v.x * .5 + .5) * r.width, py = r.top - box.top + (-v.y * .5 + .5) * r.height
+        el.style.transform = `translate(${px}px, ${py}px) translate(-50%, -100%)`
+    })
+}
+
+window.addEventListener('langchange', () => { if (xray) buildLabels() })
+
+// API para los botones accesibles debajo de la escena (y para la terminal)
 window.deskScene = {
     activate: key => {
+        if (key === 'xray') return setXray(!xray)
         const item = interactives.find(i => i.key === key)
         if (item) item.action()
-    }
+    },
+    xray: on => setXray(on === undefined ? !xray : on)
 }
 
 /*==================== LOOP ====================*/
@@ -678,10 +739,11 @@ const tick = () => {
     // Lámpara
     lampPulse = Math.max(lampPulse - .03, 0)
     lampLight.intensity += ((lampOn ? 6 : 0) + lampPulse * 4 - lampLight.intensity) * .15
-    bulb.material.color.set(lampOn ? '#ffd29a' : '#ffe2b8')
+    bulbMat.color.set(lampOn ? '#ffd29a' : '#ffe2b8')
     lampLight.position.copy(lamp.localToWorld(lampAnchor.clone()))
 
     renderer.render(scene, camera)
+    if (xray) placeLabels()
 }
 
 /*==================== START ====================*/

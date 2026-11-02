@@ -7,6 +7,60 @@ const finePointer = window.matchMedia('(pointer: fine)').matches
 /*==================== PROJECT DATA ====================*/
 const projects = {
     fiskality: {
+        case: {
+            "problem": "Las empresas y los despachos contables usan una herramienta para facturar, otra para la contabilidad y otra para la nómina, casi siempre de escritorio y con licencias caras. La información se captura dos veces y los errores fiscales cuestan.",
+            "solution": "Una sola plataforma web multiempresa donde la factura timbrada alimenta la contabilidad y la nómina sin recaptura. Cada empresa queda aislada a nivel de base de datos y las tareas pesadas (timbrado, PDF, correos, descargas del SAT) corren en segundo plano.",
+            "results": [
+                [
+                    "907",
+                    "pruebas automatizadas de API"
+                ],
+                [
+                    "246",
+                    "pruebas de interfaz"
+                ],
+                [
+                    "~5.5 min",
+                    "del push a producción (antes 18–28)"
+                ],
+                [
+                    "95/95",
+                    "sondeos en 200 durante un despliegue"
+                ]
+            ],
+            "arch": [
+                [
+                    "Cliente",
+                    [
+                        "Navegador · PWA"
+                    ]
+                ],
+                [
+                    "Borde",
+                    [
+                        "Caddy · HTTPS",
+                        "Cloudflare DNS"
+                    ]
+                ],
+                [
+                    "Aplicación",
+                    [
+                        "Next.js (web)",
+                        "Fastify (API)",
+                        "Worker BullMQ"
+                    ]
+                ],
+                [
+                    "Datos y servicios",
+                    [
+                        "PostgreSQL + RLS",
+                        "Redis",
+                        "Almacenamiento S3",
+                        "PAC de timbrado"
+                    ]
+                ]
+            ]
+        },
         title: 'Fiskality',
         image: 'assets/img/fiskality.webp',
         meta: ['2025 — hoy', 'SaaS multiempresa', 'En producción'],
@@ -24,6 +78,58 @@ const projects = {
         ]
     },
     presto: {
+        case: {
+            "problem": "Llevar préstamos en hojas de cálculo provoca errores en cuotas, intereses y mora, pagos sin comprobante y cero visibilidad del capital prestado.",
+            "solution": "Un sistema que calcula la tabla de amortización, aplica la mora cada día con una tarea programada, registra pagos con recibo en PDF y concentra reportes de capital, intereses y clientes.",
+            "results": [
+                [
+                    "2",
+                    "tipos de préstamo: fijo y express"
+                ],
+                [
+                    "Diario",
+                    "cálculo automático de mora"
+                ],
+                [
+                    "5",
+                    "reportes para el negocio"
+                ],
+                [
+                    "CI",
+                    "despliegue automático a VPS"
+                ]
+            ],
+            "arch": [
+                [
+                    "Cliente",
+                    [
+                        "Navegador"
+                    ]
+                ],
+                [
+                    "Borde",
+                    [
+                        "Caddy · HTTPS"
+                    ]
+                ],
+                [
+                    "Aplicación",
+                    [
+                        "Next.js 15",
+                        "API Express",
+                        "Tarea diaria de mora"
+                    ]
+                ],
+                [
+                    "Datos",
+                    [
+                        "PostgreSQL",
+                        "Prisma ORM",
+                        "Recibos PDF"
+                    ]
+                ]
+            ]
+        },
         title: 'Presto+ · Gestión de Préstamos',
         image: 'assets/img/presto.webp',
         meta: ['2025 — hoy', 'En producción'],
@@ -41,6 +147,59 @@ const projects = {
         ]
     },
     sgse: {
+        case: {
+            "problem": "Las empresas de seguridad controlan rondines y turnos en papel o mensajes: no hay prueba de que el guardia pasó por cada punto ni visibilidad de la carga de trabajo.",
+            "solution": "Cada guardia entra con el QR de su carnet y registra los checkpoints escaneándolos con la cámara. Los supervisores ven en tiempo real los rondines y planean turnos en un calendario.",
+            "results": [
+                [
+                    "4",
+                    "roles con permisos atómicos"
+                ],
+                [
+                    "QR",
+                    "acceso por carnet y checkpoints"
+                ],
+                [
+                    "12/14 h",
+                    "turnos configurables"
+                ],
+                [
+                    "Tiempo real",
+                    "con Socket.io"
+                ]
+            ],
+            "arch": [
+                [
+                    "Cliente",
+                    [
+                        "Navegador",
+                        "Cámara del celular"
+                    ]
+                ],
+                [
+                    "Borde",
+                    [
+                        "Caddy · HTTPS"
+                    ]
+                ],
+                [
+                    "Aplicación",
+                    [
+                        "Next.js 15",
+                        "NestJS API",
+                        "Socket.io"
+                    ]
+                ],
+                [
+                    "Datos",
+                    [
+                        "PostgreSQL",
+                        "Prisma ORM",
+                        "Archivos de sedes"
+                    ]
+                ]
+            ]
+        },
         title: 'SGSE · Sistema de Gestión de Seguridad',
         image: 'assets/img/sgse.webp',
         meta: ['2026', 'En producción'],
@@ -129,6 +288,39 @@ window.addEventListener('scene:ready', () => { sceneReady = true })
 // Si WebGL tarda o falla, no bloqueamos la página
 setTimeout(() => { pageReady = true; sceneReady = true }, 4000)
 setTimeout(finishLoading, 6000)
+
+/*==================== SMOOTH SCROLL ====================*/
+// Lenis solo en escritorio con mouse; en táctil el scroll nativo se siente mejor
+const lenis = finePointer && !reduceMotion && window.Lenis ? new Lenis({ lerp: .1, wheelMultiplier: .9 }) : null
+
+if (lenis) {
+    const raf = time => { lenis.raf(time); requestAnimationFrame(raf) }
+    requestAnimationFrame(raf)
+}
+
+window.smoothScrollTo = target => {
+    const el = typeof target === 'string' ? $(target) : target
+    if (!el) return
+    if (lenis) lenis.scrollTo(el, { offset: -70, duration: 1.2 })
+    else el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
+}
+
+// Los enlaces internos usan el mismo desplazamiento suave
+document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]')
+    if (!a || a.getAttribute('href').length < 2) return
+    e.preventDefault()
+    window.smoothScrollTo(a.getAttribute('href'))
+    history.replaceState(null, '', a.getAttribute('href'))
+})
+
+// Pausar el scroll suave mientras hay una ventana abierta
+const syncScrollLock = () => {
+    if (!lenis) return
+    const locked = !!document.querySelector('dialog[open]') || document.getElementById('nav-menu').classList.contains('is-open')
+    locked ? lenis.stop() : lenis.start()
+}
+new MutationObserver(syncScrollLock).observe(document.body, { subtree: true, attributes: true, attributeFilter: ['open', 'class'] })
 
 /*==================== THEME ====================*/
 const themeButton = $('#theme-button')
@@ -404,6 +596,28 @@ if (finePointer && !reduceMotion) {
 const modal = $('#project-modal'),
       modalContent = $('#modal-content')
 
+// Caso de estudio: problema → solución → resultados, y la arquitectura como capas
+const caseStudy = c => `
+    <div class="case">
+        <div class="case__col">
+            <h4 class="case__heading"><span>01</span> ${i18n.t('case.problem')}</h4>
+            <p>${c.problem}</p>
+        </div>
+        <div class="case__col">
+            <h4 class="case__heading"><span>02</span> ${i18n.t('case.solution')}</h4>
+            <p>${c.solution}</p>
+        </div>
+    </div>
+    <h4 class="case__heading"><span>03</span> ${i18n.t('case.results')}</h4>
+    <div class="case__results">${c.results.map(([v, l]) => `<div><strong>${v}</strong><span>${l}</span></div>`).join('')}</div>
+    <h4 class="case__heading"><span>04</span> ${i18n.t('case.arch')}</h4>
+    <div class="arch" role="list">${c.arch.map(([layer, nodes]) => `
+        <div class="arch__layer" role="listitem">
+            <span class="arch__label">${layer}</span>
+            ${nodes.map(n => `<span class="arch__node">${n}</span>`).join('')}
+        </div>`).join('<span class="arch__arrow" aria-hidden="true"></span>')}
+    </div>`
+
 const openProject = key => {
     const base = projects[key]
     if (!base) return
@@ -423,6 +637,8 @@ const openProject = key => {
             <h3 id="modal-title">${p.title}</h3>
             ${statusLine}
             <p>${p.summary}</p>
+            ${p.case ? caseStudy(p.case) : ''}
+            ${p.case ? `<h4 class="case__heading">${i18n.t('case.features')}</h4>` : ''}
             <ul class="job__list">${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
             <ul class="chips">${p.stack.map(s => `<li>${s}</li>`).join('')}</ul>
             ${p.note ? `<p class="project__subtitle"><i class='bx bx-lock-alt'></i> ${p.note}</p>` : ''}
