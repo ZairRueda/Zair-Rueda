@@ -6,45 +6,56 @@ const finePointer = window.matchMedia('(pointer: fine)').matches
 
 /*==================== PROJECT DATA ====================*/
 const projects = {
-    tickets: {
-        title: 'Sistema de Administración de Tickets',
-        meta: ['2024', 'Uso interno en empresa', 'En producción'],
-        summary: 'Plataforma de soporte interno con notificaciones en tiempo real que reemplazó un servicio externo de pago.',
+    fiskality: {
+        title: 'Fiskality',
+        image: 'assets/img/fiskality.jpg',
+        meta: ['2025 — hoy', 'SaaS multiempresa', 'En producción'],
+        summary: 'Plataforma para que empresas y despachos contables facturen, lleven su contabilidad electrónica y paguen su nómina desde un solo lugar.',
         bullets: [
-            '<strong>Impacto directo en costos:</strong> sustituyó un servicio de pago con gastos recurrentes significativos, eliminando ese costo por completo.',
-            'Desarrollado en <strong>un solo fin de semana</strong>, fuera de horario laboral, como iniciativa propia.',
-            'Autenticación JWT, WebSockets en tiempo real (Socket.io), almacenamiento de archivos en AWS S3 y panel de administración.',
-            'Monolito con separación clara frontend/backend: NestJS + Prisma en el backend, Next.js 14 + Tailwind en el frontend.'
+            '<strong>Facturación CFDI 4.0:</strong> ingreso, egreso y pago 2.0, factura global, cancelación con motivo, cotizaciones, anticipos, portal de clientes y PDF con QR.',
+            '<strong>Contabilidad electrónica:</strong> pólizas, cierre guiado, XML del Anexo 24 validado contra XSD, descarga masiva del SAT con e.firma, conciliación bancaria, DIOT y pagos provisionales.',
+            '<strong>Nómina:</strong> incidencias, vacaciones, aguinaldo, finiquito, PTU, ISR anual, movimientos IMSS/SUA y dispersión bancaria.',
+            '<strong>Arquitectura:</strong> multi-tenant con Row-Level Security de PostgreSQL, monolito modular con worker asíncrono (BullMQ), RBAC y cifrado en reposo de los CSD.',
+            '<strong>Operación:</strong> migré la infraestructura de Railway a un VPS propio con Docker y Caddy, CI/CD, respaldos diarios verificados y despliegues sin caída (95/95 sondeos en 200).'
         ],
-        stack: ['NestJS', 'Next.js 14', 'TypeScript', 'PostgreSQL', 'Prisma', 'Socket.io', 'JWT', 'AWS S3', 'Tailwind CSS', 'Zustand'],
-        links: [],
-        note: 'Proyecto privado de uso interno: código y demo no públicos.'
+        stack: ['Fastify', 'Next.js', 'TypeScript', 'PostgreSQL + RLS', 'Prisma', 'BullMQ', 'Redis', 'Zod', 'shadcn/ui', 'Docker', 'Caddy', 'GitHub Actions'],
+        links: [
+            { label: 'Visitar fiskality.com', href: 'https://fiskality.com', icon: 'bx-link-external', primary: true }
+        ]
     },
-    loans: {
-        title: 'Presta+ · Gestión de Préstamos Escalable',
-        image: 'assets/img/portfolio4.png',
-        meta: ['Abr 2025 — En desarrollo', 'Full Stack'],
-        summary: 'Plataforma para administrar préstamos, clientes y documentos con una arquitectura moderna y testeada.',
+    presto: {
+        title: 'Presto+ · Gestión de Préstamos',
+        image: 'assets/img/presto.jpg',
+        meta: ['2025 — hoy', 'En producción'],
+        summary: 'Sistema para administrar préstamos fijos y express: calcula cuotas, intereses y mora al día, registra pagos y entrega recibos en PDF.',
         bullets: [
-            'Arquitectura full stack con <strong>Next.js 15.3 (App Router)</strong>, Prisma y PostgreSQL hosteado en Railway.',
-            'Almacenamiento seguro de documentos en <strong>AWS S3 con URLs firmadas</strong>.',
-            'Suite de pruebas con Jest y autenticación JWT con roles de usuario.'
+            'Préstamos fijos y express con tabla de amortización, simulador y solicitudes.',
+            'Mora y estados actualizados con una tarea programada diaria.',
+            'Reportes de capital, intereses, clientes y préstamos activos o asignados, cuentas bancarias, importación de datos y bitácora de auditoría.',
+            'Centro de tickets de soporte con registro técnico de peticiones para diagnosticar errores.',
+            'Pruebas unitarias e integración con Jest contra PostgreSQL real, y Cypress/Vitest en el frontend.'
         ],
-        stack: ['React 18', 'TypeScript', 'Node.js', 'Next.js 15', 'Prisma', 'PostgreSQL', 'Jest', 'AWS'],
-        links: []
+        stack: ['Next.js 15', 'React 18', 'TypeScript', 'Express', 'Prisma', 'PostgreSQL', 'Jest', 'Cypress', 'Docker'],
+        links: [
+            { label: 'Visitar Presto+', href: 'https://presta-mas.54-39-110-141.sslip.io', icon: 'bx-link-external', primary: true }
+        ]
     },
-    cfdi: {
-        title: 'Facturación Electrónica (CFDI 4.0)',
-        meta: ['2025', 'En desarrollo', 'Open source'],
-        summary: 'Alternativa open source a soluciones comerciales tipo CONTPAQi para emitir y timbrar facturas electrónicas.',
+    sgse: {
+        title: 'SGSE · Sistema de Gestión de Seguridad',
+        image: 'assets/img/sgse.jpg',
+        meta: ['2026', 'En producción'],
+        summary: 'Plataforma para empresas de seguridad privada: controla guardias, turnos y rondines en cada sede.',
         bullets: [
-            'Generación de XML <strong>CFDI 4.0</strong> e integración con PAC (SW SaaS).',
-            'Gestión de clientes y empresas con CRUD paginado, importación masiva desde Excel/CSV y autenticación JWT con roles.',
-            'Dashboard con estadísticas en tiempo real y validaciones fiscales (RFC, régimen fiscal, código postal, uso CFDI) con Zod.',
-            'Documentación Swagger automática y UI inspirada en Vercel/Linear con shadcn/ui.'
+            'Acceso con contraseña o con el <strong>QR del carnet</strong> de cada guardia.',
+            'Checkpoints escaneados con la cámara para registrar rondines.',
+            'Turnos configurables (12/14 h) con calendario de carga tipo Gantt.',
+            'Roles y permisos atómicos: super admin, admin, supervisor y guardia.',
+            'Tiempo real con Socket.io y despliegue automático por CI a VPS.'
         ],
-        stack: ['Fastify', 'Next.js 14', 'TypeScript', 'PostgreSQL', 'Prisma', 'React Query', 'Axios', 'Zod', 'shadcn/ui', 'MinIO (S3)', 'Swagger'],
-        links: []
+        stack: ['NestJS', 'Next.js 15', 'React 19', 'TypeScript', 'Prisma', 'PostgreSQL', 'Socket.io', 'JWT', 'Docker'],
+        links: [
+            { label: 'Visitar SGSE', href: 'https://sgse.54-39-110-141.sslip.io', icon: 'bx-link-external', primary: true }
+        ]
     },
     vet: {
         title: 'Sistema de Gestión Veterinario',
@@ -76,21 +87,6 @@ const projects = {
         links: [
             { label: 'Ver demo', href: 'https://crypto-checker-react.vercel.app/', icon: 'bx-link-external', primary: true },
             { label: 'Código', href: 'https://github.com/ZairRueda/Crypto-Checker-React', icon: 'bxl-github' }
-        ]
-    },
-    realstate: {
-        title: 'Plataforma Inmobiliaria',
-        image: 'assets/img/portfolio1.png',
-        meta: ['2022', 'Open source'],
-        summary: 'Sitio para venta de propiedades con panel de administración, gestión de vendedores y blog dinámico.',
-        bullets: [
-            'Arquitectura MVC en PHP con MySQL.',
-            'UI/UX responsiva con SASS y flujo de build con Gulp.',
-            'CRUD de propiedades y vendedores con carga de imágenes.'
-        ],
-        stack: ['PHP', 'MVC', 'MySQL', 'SASS', 'Gulp', 'JavaScript'],
-        links: [
-            { label: 'Código', href: 'https://github.com/ZairRueda/Real-State-Project', icon: 'bxl-github', primary: true }
         ]
     }
 }
@@ -343,10 +339,7 @@ const openProject = key => {
     const p = projects[key]
     if (!p) return
 
-    const card = $(`.project[data-project="${key}"] .project__cover`)
-    const media = p.image
-        ? `<img src="${p.image}" alt="">`
-        : card.outerHTML.replace(/\btilt\b/, '')
+    const media = `<img src="${p.image}" alt="">`
 
     modalContent.innerHTML = `
         <div class="modal__media">${media}</div>

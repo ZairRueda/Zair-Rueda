@@ -38,16 +38,15 @@ Especialista en arquitecturas escalables, modernización de sistemas legacy y li
 - **MLimpac:** landing page con envío automatizado de correos (Nodemailer).
 - **Sistema Veterinario:** gestión de citas médicas con React y Tailwind CSS.
 
-## 🚀 Proyectos
+## 🚀 Proyectos en producción
 
-| Proyecto | Estado | Stack |
+| Proyecto | Qué es | Stack |
 |---|---|---|
-| Sistema de Administración de Tickets | En producción (uso interno, 2024) — eliminó el costo de un servicio de pago | NestJS · Next.js 14 · Socket.io · AWS S3 |
-| Presta+ · Gestión de Préstamos | En desarrollo (2025) | Next.js 15 · Prisma · PostgreSQL · Jest · AWS S3 |
-| Facturación Electrónica CFDI 4.0 | En desarrollo (2025) | Fastify · Next.js 14 · Zod · shadcn/ui · MinIO |
-| [Sistema Veterinario](https://veterinary-record-patients.vercel.app/) | En vivo | React · Tailwind CSS |
-| [Crypto Checker](https://crypto-checker-react.vercel.app/) | En vivo | React |
-| [Plataforma Inmobiliaria](https://github.com/ZairRueda/Real-State-Project) | Open source | PHP MVC · MySQL · SASS |
+| [Fiskality](https://fiskality.com) | SaaS multiempresa de facturación CFDI 4.0, contabilidad electrónica y nómina | Fastify · Next.js · PostgreSQL (RLS) · Prisma · BullMQ · Docker |
+| [Presto+](https://presta-mas.54-39-110-141.sslip.io) | Gestión de préstamos fijos y express con mora diaria y recibos PDF | Next.js 15 · Express · Prisma · PostgreSQL · Jest |
+| [SGSE](https://sgse.54-39-110-141.sslip.io) | Gestión de guardias de seguridad: turnos, rondines con QR, login por carnet | NestJS · Next.js 15 · React 19 · Socket.io |
+| [Sistema Veterinario](https://veterinary-record-patients.vercel.app/) | Demo: agenda de citas y pacientes | React · Tailwind CSS |
+| [Crypto Checker](https://crypto-checker-react.vercel.app/) | Demo: cotizador de criptomonedas | React |
 
 ## 🎓 Educación
 
@@ -68,4 +67,4 @@ Especialista en arquitecturas escalables, modernización de sistemas legacy y li
 
 ---
 
-⭐️ Portafolio hecho con HTML, CSS y JavaScript vanilla, con una escena 3D procedural en Three.js. Para verlo en local: `python -m http.server 5500`.
+⭐️ Portafolio hecho con HTML, CSS y JavaScript vanilla, con escenas 3D procedurales en Three.js (escritorio en el hero y avatar en «Sobre mí»). Para verlo en local: `python -m http.server 5500`.

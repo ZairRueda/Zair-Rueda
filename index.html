@@ -10,7 +10,7 @@
     <!--==================== OPEN GRAPH ====================-->
     <meta property="og:title" content="Andrés Zair Jiménez Rueda · Full Stack Senior">
     <meta property="og:description" content="PHP/Laravel · React · Node.js · AWS — soluciones en producción con impacto real.">
-    <meta property="og:image" content="assets/img/portfolio4.png">
+    <meta property="og:image" content="assets/img/fiskality.jpg">
     <meta property="og:type" content="website">
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff7a1a'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='700' font-size='34' fill='%23fff'%3EZ%3C/text%3E%3C/svg%3E">
@@ -123,15 +123,17 @@
 
             <div class="container about__container">
                 <div class="about__photo reveal">
-                    <div class="holo-card">
-                        <img src="assets/img/perfil.png" alt="Fotografía de Andrés Zair Jiménez Rueda" loading="lazy">
-                        <span class="holo-card__scan" aria-hidden="true"></span>
-                    </div>
+                    <canvas class="avatar-canvas" id="avatar-canvas" aria-label="Avatar 3D de Andrés Zair. Arrástralo para girarlo o haz clic para que salude."></canvas>
+                    <img class="avatar-fallback" src="assets/img/perfil.png" alt="Fotografía de Andrés Zair Jiménez Rueda" loading="lazy">
+
                     <div class="holo-label">
-                        <strong>Andrés Zair</strong>
-                        <span><i class='bx bx-map'></i> Acapulco, Gro.</span>
+                        <img src="assets/img/perfil.png" alt="" class="holo-label__photo" loading="lazy">
+                        <div>
+                            <strong>Andrés Zair</strong>
+                            <span><i class='bx bx-map'></i> Acapulco, Gro.</span>
+                        </div>
                     </div>
-                    <div class="holo-base" aria-hidden="true"><span>005</span></div>
+                    <p class="avatar-hint"><i class='bx bx-pointer'></i> Arrástrame o haz clic para saludar</p>
                 </div>
 
                 <div class="about__data">
@@ -304,92 +306,72 @@
             <div class="container">
                 <header class="section__header section__header--row">
                     <div>
-                        <span class="tag tag--navy reveal">SELECCIONADOS</span>
+                        <span class="tag tag--navy reveal">EN PRODUCCIÓN</span>
                         <h2 class="section__title reveal">Proyectos</h2>
                     </div>
 
                     <div class="filters reveal" role="tablist" aria-label="Filtrar proyectos">
                         <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
-                        <button class="filter" data-filter="prod" role="tab" aria-selected="false">En producción</button>
-                        <button class="filter" data-filter="dev" role="tab" aria-selected="false">En desarrollo</button>
-                        <button class="filter" data-filter="oss" role="tab" aria-selected="false">Open source</button>
+                        <button class="filter" data-filter="saas" role="tab" aria-selected="false">Plataformas</button>
+                        <button class="filter" data-filter="demo" role="tab" aria-selected="false">Demos</button>
                     </div>
                 </header>
 
                 <div class="projects__grid" id="projects-grid">
 
-                    <!-- TICKETS -->
-                    <article class="project reveal" data-cat="prod" data-project="tickets" tabindex="0">
-                        <div class="project__cover project__cover--tickets tilt">
-                            <div class="mock mock--tickets" aria-hidden="true">
-                                <div class="mock__bar"><i></i><i></i><i></i></div>
-                                <div class="mock__body">
-                                    <aside class="mock__side"><b></b><b></b><b></b><b></b></aside>
-                                    <div class="mock__main">
-                                        <div class="mock__row"><span class="pill pill--green">Abierto</span><span class="line"></span></div>
-                                        <div class="mock__row"><span class="pill pill--amber">En curso</span><span class="line"></span></div>
-                                        <div class="mock__row"><span class="pill pill--blue">Resuelto</span><span class="line"></span></div>
-                                        <div class="mock__row"><span class="pill pill--green">Abierto</span><span class="line"></span></div>
-                                        <div class="mock__toast"><i class='bx bx-bell'></i> Nuevo ticket en tiempo real</div>
-                                    </div>
-                                </div>
+                    <!-- FISKALITY -->
+                    <article class="project project--featured reveal" data-cat="saas" data-project="fiskality" tabindex="0">
+                        <div class="project__cover tilt">
+                            <img src="assets/img/fiskality.jpg" alt="Página principal de Fiskality, plataforma de facturación y contabilidad" loading="lazy">
+                            <span class="badge badge--live"><span class="dot dot--live"></span> En producción · fiskality.com</span>
+                        </div>
+                        <div class="project__info">
+                            <div>
+                                <h3 class="project__title">Fiskality</h3>
+                                <p class="project__subtitle">SaaS multiempresa de facturación CFDI 4.0, contabilidad electrónica y nómina para empresas y despachos contables</p>
                             </div>
+                            <span class="project__year">2025 — hoy</span>
+                        </div>
+                        <ul class="chips chips--sm"><li>Fastify</li><li>Next.js</li><li>PostgreSQL RLS</li><li>BullMQ</li><li>Docker</li></ul>
+                    </article>
+
+                    <!-- PRESTO+ -->
+                    <article class="project reveal" data-cat="saas" data-project="presto" tabindex="0">
+                        <div class="project__cover tilt">
+                            <img src="assets/img/presto.jpg" alt="Página principal de Presto+, gestión de préstamos" loading="lazy">
                             <span class="badge badge--live"><span class="dot dot--live"></span> En producción</span>
                         </div>
                         <div class="project__info">
                             <div>
-                                <h3 class="project__title">Sistema de Tickets</h3>
-                                <p class="project__subtitle">Reemplazó un servicio de pago → costo recurrente eliminado</p>
+                                <h3 class="project__title">Presto+</h3>
+                                <p class="project__subtitle">Préstamos fijos y express con mora calculada al día y recibos en PDF</p>
                             </div>
-                            <span class="project__year">2024</span>
+                            <span class="project__year">2025</span>
                         </div>
-                        <ul class="chips chips--sm"><li>NestJS</li><li>Next.js 14</li><li>Socket.io</li><li>AWS S3</li></ul>
+                        <ul class="chips chips--sm"><li>Next.js 15</li><li>Express</li><li>Prisma</li><li>PostgreSQL</li></ul>
                     </article>
 
-                    <!-- PRESTAMOS -->
-                    <article class="project reveal" data-cat="dev" data-project="loans" tabindex="0">
+                    <!-- SGSE -->
+                    <article class="project reveal" data-cat="saas" data-project="sgse" tabindex="0">
                         <div class="project__cover tilt">
-                            <img src="assets/img/portfolio4.png" alt="Pantalla principal de Presta+, sistema de gestión de préstamos" loading="lazy">
-                            <span class="badge badge--dev">En desarrollo</span>
+                            <img src="assets/img/sgse.jpg" alt="Pantalla de acceso de SGSE, sistema de gestión de seguridad" loading="lazy">
+                            <span class="badge badge--live"><span class="dot dot--live"></span> En producción</span>
                         </div>
                         <div class="project__info">
                             <div>
-                                <h3 class="project__title">Presta+ · Gestión de Préstamos</h3>
-                                <p class="project__subtitle">Plataforma escalable con documentos seguros en S3</p>
+                                <h3 class="project__title">SGSE</h3>
+                                <p class="project__subtitle">Gestión de guardias de seguridad: turnos, rondines con QR y login por carnet</p>
                             </div>
-                            <span class="project__year">2025</span>
+                            <span class="project__year">2026</span>
                         </div>
-                        <ul class="chips chips--sm"><li>Next.js 15</li><li>Prisma</li><li>PostgreSQL</li><li>Jest</li></ul>
-                    </article>
-
-                    <!-- CFDI -->
-                    <article class="project reveal" data-cat="dev" data-project="cfdi" tabindex="0">
-                        <div class="project__cover project__cover--cfdi tilt">
-                            <div class="mock mock--cfdi" aria-hidden="true">
-                                <div class="mock__bar"><i></i><i></i><i></i></div>
-                                <div class="mock__body mock__body--col">
-                                    <div class="kpis"><span><em>Facturas</em><b>1,284</b></span><span><em>Timbradas</em><b>98.7%</b></span><span><em>Clientes</em><b>342</b></span></div>
-                                    <div class="bars"><i style="--h:40%"></i><i style="--h:65%"></i><i style="--h:50%"></i><i style="--h:80%"></i><i style="--h:70%"></i><i style="--h:95%"></i><i style="--h:60%"></i></div>
-                                    <div class="xml">&lt;cfdi:Comprobante Version="4.0" …/&gt;</div>
-                                </div>
-                            </div>
-                            <span class="badge badge--dev">En desarrollo</span>
-                        </div>
-                        <div class="project__info">
-                            <div>
-                                <h3 class="project__title">Facturación Electrónica CFDI 4.0</h3>
-                                <p class="project__subtitle">Alternativa open source a CONTPAQi con timbrado vía PAC</p>
-                            </div>
-                            <span class="project__year">2025</span>
-                        </div>
-                        <ul class="chips chips--sm"><li>Fastify</li><li>Next.js 14</li><li>Zod</li><li>shadcn/ui</li></ul>
+                        <ul class="chips chips--sm"><li>NestJS</li><li>Next.js 15</li><li>React 19</li><li>Socket.io</li></ul>
                     </article>
 
                     <!-- VETERINARIA -->
-                    <article class="project reveal" data-cat="prod oss" data-project="vet" tabindex="0">
+                    <article class="project reveal" data-cat="demo" data-project="vet" tabindex="0">
                         <div class="project__cover tilt">
                             <img src="assets/img/portfolio2.png" alt="Sistema de citas para veterinaria" loading="lazy">
-                            <span class="badge badge--live"><span class="dot dot--live"></span> En vivo</span>
+                            <span class="badge badge--live"><span class="dot dot--live"></span> Demo en vivo</span>
                         </div>
                         <div class="project__info">
                             <div>
@@ -402,10 +384,10 @@
                     </article>
 
                     <!-- CRYPTO -->
-                    <article class="project reveal" data-cat="prod oss" data-project="crypto" tabindex="0">
+                    <article class="project reveal" data-cat="demo" data-project="crypto" tabindex="0">
                         <div class="project__cover tilt">
                             <img src="assets/img/portfolio3.png" alt="Cotizador de criptomonedas" loading="lazy">
-                            <span class="badge badge--live"><span class="dot dot--live"></span> En vivo</span>
+                            <span class="badge badge--live"><span class="dot dot--live"></span> Demo en vivo</span>
                         </div>
                         <div class="project__info">
                             <div>
@@ -415,22 +397,6 @@
                             <span class="project__year">2022</span>
                         </div>
                         <ul class="chips chips--sm"><li>React</li><li>Hooks</li><li>API REST</li></ul>
-                    </article>
-
-                    <!-- REAL STATE -->
-                    <article class="project reveal" data-cat="oss" data-project="realstate" tabindex="0">
-                        <div class="project__cover tilt">
-                            <img src="assets/img/portfolio1.png" alt="Plataforma inmobiliaria" loading="lazy">
-                            <span class="badge badge--oss"><i class='bx bxl-github'></i> Open source</span>
-                        </div>
-                        <div class="project__info">
-                            <div>
-                                <h3 class="project__title">Plataforma Inmobiliaria</h3>
-                                <p class="project__subtitle">Panel de administración, vendedores y blog dinámico</p>
-                            </div>
-                            <span class="project__year">2022</span>
-                        </div>
-                        <ul class="chips chips--sm"><li>PHP MVC</li><li>MySQL</li><li>SASS</li><li>Gulp</li></ul>
                     </article>
                 </div>
 
@@ -555,5 +521,6 @@
     </script>
     <script src="assets/js/main.js" defer></script>
     <script type="module" src="assets/js/scene.js"></script>
+    <script type="module" src="assets/js/avatar.js"></script>
 </body>
 </html>
