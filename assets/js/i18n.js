@@ -75,6 +75,8 @@
         "contact.title": "<span class=\"split\">Let's work</span>\n                        <span class=\"split\">together!</span>",
         "contact.text": "Need to modernize a system, launch a product or strengthen your team? Write to me and let's talk about how I can help.",
         "footer.made": "© <span id=\"year\">2026</span> Andrés Zair Jiménez Rueda · Built with HTML, CSS, JS and Three.js",
+        "kinetic.row": "<span>In production</span><span>Online</span><span>In production</span><span>Online</span><span>In production</span><span>Online</span><span>In production</span><span>Online</span>",
+        "footer.hint": "<kbd>/</kbd> opens the terminal",
         "desk.kind.monitor": "Monitor",
         "desk.kind.monitor2": "Monitor",
         "desk.kind.server": "Server",

@@ -90,6 +90,8 @@ const projects = {
     }
 }
 
+window.projects = projects
+
 /*==================== PRELOADER ====================*/
 const loader = $('#loader'),
       loaderCount = $('#loader-count'),
@@ -209,6 +211,46 @@ const onScroll = () => {
 }
 window.addEventListener('scroll', onScroll, { passive: true })
 onScroll()
+
+/*==================== KINETIC TYPE ====================*/
+// La velocidad del scroll inclina los títulos y empuja las franjas de texto
+const kinetic = $('#kinetic'),
+      kineticRows = $$('.kinetic__row'),
+      marqueeTrack = $('.marquee__track')
+
+if (reduceMotion) document.documentElement.classList.add('no-kinetic')
+else {
+    let prevY = window.scrollY, velocity = 0, skew = 0, marqueeX = 0, direction = 1
+
+    const kineticLoop = () => {
+        const y = window.scrollY, delta = y - prevY
+        prevY = y
+        velocity += (delta - velocity) * .12
+        if (Math.abs(delta) > .5) direction = Math.sign(delta)
+
+        skew += (Math.max(Math.min(velocity * .15, 6), -6) - skew) * .15
+        document.documentElement.style.setProperty('--skew', skew.toFixed(3))
+
+        // La franja del stack siempre avanza, acelera con el scroll y cambia de sentido con él
+        const half = marqueeTrack.scrollWidth / 2
+        marqueeX -= (.6 + Math.abs(velocity) * .25) * direction
+        if (marqueeX <= -half) marqueeX += half
+        if (marqueeX > 0) marqueeX -= half
+        marqueeTrack.style.transform = `translateX(${marqueeX}px)`
+
+        // La banda gigante se desplaza según la posición en pantalla, cada fila en sentido opuesto
+        const r = kinetic.getBoundingClientRect()
+        if (r.bottom > 0 && r.top < innerHeight) {
+            const p = (innerHeight - r.top) / (innerHeight + r.height)
+            kineticRows.forEach(row => {
+                const span = row.scrollWidth - innerWidth, offset = p * span * .5
+                row.style.transform = `translateX(${+row.dataset.dir < 0 ? -offset : offset - span * .5}px)`
+            })
+        }
+        requestAnimationFrame(kineticLoop)
+    }
+    kineticLoop()
+}
 
 /*==================== SPLIT TEXT ====================*/
 const splitText = () => $$('.split').forEach(el => {

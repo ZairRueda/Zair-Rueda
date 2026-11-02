@@ -77,6 +77,7 @@
 
             <div class="nav__actions">
                 <a href="#contact" class="button button--accent nav__cta magnetic" data-i18n="nav.cta">Hablemos</a>
+                <button class="icon-button" id="terminal-button" aria-label="Abrir terminal (tecla /)" title="Terminal ( / )"><i class='bx bx-terminal'></i></button>
                 <button class="icon-button lang-button" id="lang-button" aria-label="Switch to English">EN</button>
                 <button class="icon-button" id="theme-button" aria-label="Cambiar tema">
                     <i class='bx bx-moon'></i>
@@ -146,6 +147,7 @@
                         <div class="portrait__layer portrait__frame"></div>
                         <div class="portrait__layer portrait__sun" aria-hidden="true"></div>
                         <img class="portrait__layer portrait__photo" src="assets/img/zair.webp" alt="Fotografía de Andrés Zair Jiménez Rueda" loading="lazy">
+                        <canvas class="portrait__layer portrait__canvas" id="portrait-canvas" aria-hidden="true"></canvas>
 
                         <span class="portrait__layer portrait__chip chip-a"><i class='bx bxl-php'></i> Laravel</span>
                         <span class="portrait__layer portrait__chip chip-b"><i class='bx bxl-react'></i> React</span>
@@ -319,6 +321,16 @@
                 </div>
             </div>
         </section>
+
+        <!--==================== KINETIC BAND ====================-->
+        <div class="kinetic" id="kinetic" aria-hidden="true">
+            <div class="kinetic__row" data-dir="-1">
+                <span>Fiskality</span><span>Presto+</span><span>SGSE</span><span>Fiskality</span><span>Presto+</span><span>SGSE</span><span>Fiskality</span><span>Presto+</span><span>SGSE</span>
+            </div>
+            <div class="kinetic__row kinetic__row--outline" data-dir="1" data-i18n="kinetic.row">
+                <span>En producción</span><span>En línea</span><span>En producción</span><span>En línea</span><span>En producción</span><span>En línea</span><span>En producción</span><span>En línea</span>
+            </div>
+        </div>
 
         <!--==================== PROJECTS ====================-->
         <section class="projects section" id="projects">
@@ -517,6 +529,7 @@
     <footer class="footer">
         <div class="container footer__container">
             <a href="#home" class="icon-button" aria-label="Volver arriba"><i class='bx bx-up-arrow-alt'></i></a>
+            <p class="footer__hint" data-i18n="footer.hint"><kbd>/</kbd> abre la terminal</p>
             <p data-i18n="footer.made">© <span id="year">2026</span> Andrés Zair Jiménez Rueda · Hecho con HTML, CSS, JS y Three.js</p>
         </div>
     </footer>
@@ -525,6 +538,20 @@
     <dialog class="modal" id="project-modal" aria-labelledby="modal-title">
         <button class="icon-button modal__close" id="modal-close" aria-label="Cerrar"><i class='bx bx-x'></i></button>
         <div class="modal__content" id="modal-content"></div>
+    </dialog>
+
+    <!--==================== TERMINAL ====================-->
+    <dialog class="term" id="terminal" aria-label="Terminal">
+        <div class="term__bar">
+            <span class="term__dots"><i></i><i></i><i></i></span>
+            <span class="term__title">zair@acapulco: ~</span>
+            <button class="term__close" id="term-close" aria-label="Cerrar terminal"><i class='bx bx-x'></i></button>
+        </div>
+        <div class="term__output" id="term-output" aria-live="polite"></div>
+        <form class="term__form" id="term-form" autocomplete="off">
+            <label class="t-prompt-label" for="term-input"><span class="t-prompt">zair@acapulco</span>:<span class="t-path">~</span>$</label>
+            <input class="term__input" id="term-input" type="text" spellcheck="false" autocapitalize="off" enterkeyhint="send">
+        </form>
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -541,6 +568,8 @@
     </script>
     <script src="assets/js/i18n.js" defer></script>
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/terminal.js" defer></script>
     <script type="module" src="assets/js/scene.js"></script>
+    <script type="module" src="assets/js/portrait.js"></script>
 </body>
 </html>

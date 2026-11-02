@@ -67,4 +67,4 @@ Especialista en arquitecturas escalables, modernización de sistemas legacy y li
 
 ---
 
-⭐️ Portafolio hecho con HTML, CSS y JavaScript vanilla, con un escritorio 3D interactivo en Three.js (cada objeto lleva a un proyecto real en producción, con estado verificado en vivo), versión en español e inglés y un retrato con profundidad en «Sobre mí». Para verlo en local: `python -m http.server 5500`.
+⭐️ Portafolio hecho con HTML, CSS y JavaScript vanilla, con un escritorio 3D interactivo en Three.js (cada objeto lleva a un proyecto real en producción, con estado verificado en vivo), versión en español e inglés, retrato de partículas en «Sobre mí», terminal interactiva (tecla /) y tipografía cinética ligada al scroll. Para verlo en local: `python -m http.server 5500`.
