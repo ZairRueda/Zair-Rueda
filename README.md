@@ -44,7 +44,7 @@ Especialista en arquitecturas escalables, modernización de sistemas legacy y li
 |---|---|---|
 | [Fiskality](https://fiskality.com) | SaaS multiempresa de facturación CFDI 4.0, contabilidad electrónica y nómina | Fastify · Next.js · PostgreSQL (RLS) · Prisma · BullMQ · Docker |
 | [Presto+](https://presta-mas.54-39-110-141.sslip.io) | Gestión de préstamos fijos y express con mora diaria y recibos PDF | Next.js 15 · Express · Prisma · PostgreSQL · Jest |
-| [SGSE](https://sgse.54-39-110-141.sslip.io) | Gestión de guardias de seguridad: turnos, rondines con QR, login por carnet | NestJS · Next.js 15 · React 19 · Socket.io |
+| SGSE (privado) | Gestión de guardias de seguridad: turnos, rondines con QR, login por carnet | NestJS · Next.js 15 · React 19 · Socket.io |
 | [Sistema Veterinario](https://veterinary-record-patients.vercel.app/) | Demo: agenda de citas y pacientes | React · Tailwind CSS |
 | [Crypto Checker](https://crypto-checker-react.vercel.app/) | Demo: cotizador de criptomonedas | React |
 
@@ -67,4 +67,4 @@ Especialista en arquitecturas escalables, modernización de sistemas legacy y li
 
 ---
 
-⭐️ Portafolio hecho con HTML, CSS y JavaScript vanilla, con escenas 3D procedurales en Three.js (escritorio en el hero y avatar en «Sobre mí»). Para verlo en local: `python -m http.server 5500`.
+⭐️ Portafolio hecho con HTML, CSS y JavaScript vanilla, con una escena 3D procedural en Three.js en el hero y un retrato con profundidad en «Sobre mí». Para verlo en local: `python -m http.server 5500`.

@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrés Zair Jiménez Rueda · Full Stack Senior</title>
     <meta name="description" content="Desarrollador Full Stack Senior con más de 5 años de experiencia en PHP/Laravel, React, Node.js y AWS. Arquitecturas escalables, modernización de sistemas legacy y liderazgo técnico.">
-    <meta name="theme-color" content="#f5ede3">
+    <meta name="theme-color" content="#f3f5f2">
 
     <!--==================== OPEN GRAPH ====================-->
     <meta property="og:title" content="Andrés Zair Jiménez Rueda · Full Stack Senior">
     <meta property="og:description" content="PHP/Laravel · React · Node.js · AWS — soluciones en producción con impacto real.">
-    <meta property="og:image" content="assets/img/fiskality.jpg">
+    <meta property="og:image" content="assets/img/fiskality.webp">
     <meta property="og:type" content="website">
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff7a1a'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='700' font-size='34' fill='%23fff'%3EZ%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2214%22%20fill%3D%22%230e1c1f%22/%3E%3Cpath%20d%3D%22M13.5%2013L34%2016L14.5%2033.5%22%20fill%3D%22none%22%20stroke%3D%22%23f3f5f2%22%20stroke-width%3D%225.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M14.5%2035.5H34.5%22%20stroke%3D%22%23ff5f3a%22%20stroke-width%3D%225.5%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
 
     <!--==================== FONTS & ICONS ====================-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
     <!--==================== CSS ====================-->
@@ -39,7 +39,11 @@
     <!--==================== PRELOADER ====================-->
     <div class="loader" id="loader" aria-hidden="true">
         <div class="loader__box">
-            <span class="loader__logo">Z</span>
+            <svg class="logo loader__logo" viewBox="0 0 48 48" aria-hidden="true">
+                    <rect class="logo__bg" width="48" height="48" rx="14"/>
+                    <path class="logo__chevron" d="M13.5 13L34 16L14.5 33.5"/>
+                    <path class="logo__cursor" d="M14.5 35.5H34.5"/>
+                </svg>
             <span class="loader__count" id="loader-count">000</span>
             <span class="loader__bar"><span id="loader-bar"></span></span>
         </div>
@@ -52,7 +56,12 @@
     <header class="header" id="header">
         <nav class="nav">
             <a href="#home" class="nav__logo" aria-label="Inicio">
-                <span class="nav__logo-mark">Z</span>
+                <svg class="logo nav__logo-mark" viewBox="0 0 48 48" aria-hidden="true">
+                    <rect class="logo__bg" width="48" height="48" rx="14"/>
+                    <path class="logo__chevron" d="M13.5 13L34 16L14.5 33.5"/>
+                    <path class="logo__cursor" d="M14.5 35.5H34.5"/>
+                </svg>
+                <span class="nav__logo-text">zair<span>_</span>rueda</span>
             </a>
 
             <div class="nav__menu" id="nav-menu">
@@ -89,7 +98,7 @@
                     <span class="split">Andrés</span>
                     <span class="split">Zair</span>
                 </h1>
-                <span class="tag tag--navy hero__tag reveal">FULL STACK SR</span>
+                <span class="tag hero__tag reveal">FULL STACK SENIOR · LARAVEL · REACT · AWS</span>
 
                 <p class="hero__description reveal">
                     Construyo sistemas en producción que <strong>ahorran dinero</strong>, eliminan errores
@@ -118,26 +127,24 @@
         </section>
 
         <!--==================== ABOUT ====================-->
-        <section class="about section section--holo" id="about">
-            <div class="holo-grid" aria-hidden="true"></div>
-
+        <section class="about section" id="about">
             <div class="container about__container">
-                <div class="about__photo reveal">
-                    <canvas class="avatar-canvas" id="avatar-canvas" aria-label="Avatar 3D de Andrés Zair. Arrástralo para girarlo o haz clic para que salude."></canvas>
-                    <img class="avatar-fallback" src="assets/img/perfil.png" alt="Fotografía de Andrés Zair Jiménez Rueda" loading="lazy">
+                <div class="about__visual reveal" id="about-visual">
+                    <div class="portrait" id="portrait">
+                        <div class="portrait__layer portrait__frame"></div>
+                        <div class="portrait__layer portrait__sun" aria-hidden="true"></div>
+                        <img class="portrait__layer portrait__photo" src="assets/img/zair.webp" alt="Fotografía de Andrés Zair Jiménez Rueda" loading="lazy">
 
-                    <div class="holo-label">
-                        <img src="assets/img/perfil.png" alt="" class="holo-label__photo" loading="lazy">
-                        <div>
-                            <strong>Andrés Zair</strong>
-                            <span><i class='bx bx-map'></i> Acapulco, Gro.</span>
-                        </div>
+                        <span class="portrait__layer portrait__chip chip-a"><i class='bx bxl-php'></i> Laravel</span>
+                        <span class="portrait__layer portrait__chip chip-b"><i class='bx bxl-react'></i> React</span>
+                        <span class="portrait__layer portrait__chip chip-c"><i class='bx bxl-nodejs'></i> Node.js</span>
+                        <span class="portrait__layer portrait__chip chip-d"><i class='bx bxl-aws'></i> AWS</span>
+                        <div class="portrait__layer portrait__badge" aria-hidden="true"><div><strong>5+</strong><span>AÑOS</span></div></div>
                     </div>
-                    <p class="avatar-hint"><i class='bx bx-pointer'></i> Arrástrame o haz clic para saludar</p>
                 </div>
 
                 <div class="about__data">
-                    <span class="tag tag--orange reveal">SOBRE MÍ</span>
+                    <span class="tag tag--accent reveal">SOBRE MÍ</span>
                     <h2 class="section__title reveal">Código con impacto en el negocio</h2>
                     <p class="about__text reveal">
                         Soy Desarrollador Full Stack Senior con <strong>más de 5 años</strong> construyendo soluciones
@@ -182,7 +189,7 @@
         <section class="experience section" id="experience">
             <div class="container">
                 <header class="section__header">
-                    <span class="tag tag--navy reveal">TRAYECTORIA</span>
+                    <span class="tag reveal">TRAYECTORIA</span>
                     <h2 class="section__title reveal">Experiencia</h2>
                 </header>
 
@@ -306,7 +313,7 @@
             <div class="container">
                 <header class="section__header section__header--row">
                     <div>
-                        <span class="tag tag--navy reveal">EN PRODUCCIÓN</span>
+                        <span class="tag reveal">EN PRODUCCIÓN</span>
                         <h2 class="section__title reveal">Proyectos</h2>
                     </div>
 
@@ -322,7 +329,7 @@
                     <!-- FISKALITY -->
                     <article class="project project--featured reveal" data-cat="saas" data-project="fiskality" tabindex="0">
                         <div class="project__cover tilt">
-                            <img src="assets/img/fiskality.jpg" alt="Página principal de Fiskality, plataforma de facturación y contabilidad" loading="lazy">
+                            <img src="assets/img/fiskality.webp" alt="Página principal de Fiskality, plataforma de facturación y contabilidad" loading="lazy">
                             <span class="badge badge--live"><span class="dot dot--live"></span> En producción · fiskality.com</span>
                         </div>
                         <div class="project__info">
@@ -338,7 +345,7 @@
                     <!-- PRESTO+ -->
                     <article class="project reveal" data-cat="saas" data-project="presto" tabindex="0">
                         <div class="project__cover tilt">
-                            <img src="assets/img/presto.jpg" alt="Página principal de Presto+, gestión de préstamos" loading="lazy">
+                            <img src="assets/img/presto.webp" alt="Página principal de Presto+, gestión de préstamos" loading="lazy">
                             <span class="badge badge--live"><span class="dot dot--live"></span> En producción</span>
                         </div>
                         <div class="project__info">
@@ -354,8 +361,8 @@
                     <!-- SGSE -->
                     <article class="project reveal" data-cat="saas" data-project="sgse" tabindex="0">
                         <div class="project__cover tilt">
-                            <img src="assets/img/sgse.jpg" alt="Pantalla de acceso de SGSE, sistema de gestión de seguridad" loading="lazy">
-                            <span class="badge badge--live"><span class="dot dot--live"></span> En producción</span>
+                            <img src="assets/img/sgse.webp" alt="Pantalla de acceso de SGSE, sistema de gestión de seguridad" loading="lazy">
+                            <span class="badge badge--live"><span class="dot dot--live"></span> En producción · Privado</span>
                         </div>
                         <div class="project__info">
                             <div>
@@ -417,7 +424,7 @@
 
             <div class="container">
                 <header class="section__header">
-                    <span class="tag tag--orange reveal">HERRAMIENTAS</span>
+                    <span class="tag tag--accent reveal">HERRAMIENTAS</span>
                     <h2 class="section__title reveal">Stack tecnológico</h2>
                 </header>
 
@@ -465,7 +472,7 @@
             <div class="container">
                 <div class="contact__card reveal">
                     <div class="contact__blob" aria-hidden="true"></div>
-                    <span class="tag tag--navy">¿NUEVO PROYECTO?</span>
+                    <span class="tag">¿NUEVO PROYECTO?</span>
                     <h2 class="contact__title">
                         <span class="split">¡Trabajemos</span>
                         <span class="split">juntos!</span>
@@ -521,6 +528,5 @@
     </script>
     <script src="assets/js/main.js" defer></script>
     <script type="module" src="assets/js/scene.js"></script>
-    <script type="module" src="assets/js/avatar.js"></script>
 </body>
 </html>

@@ -52,25 +52,25 @@ const addPiece = (obj, parent = world) => {
 }
 
 const COLORS = {
-    cream: '#fffaf2',
+    cream: '#fbfcfa',
     wood: '#d9a066',
     woodDark: '#b97f47',
     dark: '#34343f',
     darker: '#25252d',
-    orange: '#ff7a1a',
-    yellow: '#f7c65c',
-    rug1: '#f39a4a',
-    rug2: '#f7c260',
-    rug3: '#fbe39a',
+    orange: '#ff5f3a',
+    yellow: '#f1c97a',
+    rug1: '#0b6e66',
+    rug2: '#3fa597',
+    rug3: '#cfe7e1',
     green: '#5fae5a',
     greenDark: '#3f8f45',
     terracotta: '#d9774b',
-    navy: '#2f3d7a',
+    navy: '#0e3b40',
     cork: '#c99a68'
 }
 
 /*==================== LIGHTS ====================*/
-const hemi = new THREE.HemisphereLight('#fff6ea', '#e8c9a5', 1.6)
+const hemi = new THREE.HemisphereLight('#f6fbf9', '#cfe0da', 1.6)
 scene.add(hemi)
 
 const sun = new THREE.DirectionalLight('#fff1dd', 2.2)
@@ -165,7 +165,7 @@ const drawEditor = () => {
         ctx.arc(20 + i * 20, 17, 6, 0, Math.PI * 2)
         ctx.fill()
     })
-    ctx.fillStyle = '#ff7a1a'
+    ctx.fillStyle = '#ff5f3a'
     ctx.fillRect(90, 0, 190, 34)
     ctx.fillStyle = '#fff'
     ctx.font = 'bold 15px monospace'
@@ -184,7 +184,7 @@ const drawEditor = () => {
             x += ctx.measureText(tok).width
         })
         if (remaining >= 0 && remaining <= codeLines[i].length && Math.floor(performance.now() / 400) % 2) {
-            ctx.fillStyle = '#ff7a1a'
+            ctx.fillStyle = '#ff5f3a'
             ctx.fillRect(x + 1, y - 15, 9, 19)
         }
         remaining -= codeLines[i].length + 1
@@ -223,8 +223,8 @@ const drawTerminal = t => {
     bars.forEach((b, i) => {
         const h = 30 + (Math.sin(t * 1.6 + i * .8) * .5 + .5) * 70 * (.5 + b * .5)
         const grad = ctx.createLinearGradient(0, 170 - h, 0, 170)
-        grad.addColorStop(0, '#ff7a1a')
-        grad.addColorStop(1, '#ffb547')
+        grad.addColorStop(0, '#ff5f3a')
+        grad.addColorStop(1, '#f1c97a')
         ctx.fillStyle = grad
         ctx.fillRect(40 + i * 76, 170 - h, 46, h)
     })
@@ -233,7 +233,7 @@ const drawTerminal = t => {
     ctx.font = '17px monospace'
     logLines.slice(0, shownLogs).forEach(([prefix, text, color], i) => {
         const y = 222 + i * 26
-        ctx.fillStyle = prefix.trim() === '$' ? '#ff7a1a' : color
+        ctx.fillStyle = prefix.trim() === '$' ? '#ff5f3a' : color
         ctx.fillText(prefix, 20, y)
         ctx.fillStyle = color
         ctx.fillText(text, 20 + ctx.measureText(prefix).width, y)
@@ -355,7 +355,7 @@ const server = new THREE.Group()
 server.add(mesh(rbox(.5, 1.0, .85, .05), mat(COLORS.dark), { y: .58 }))
 const leds = []
 for (let i = 0; i < 6; i++) {
-    const led = mesh(rbox(.3, .035, .02, .01, 2), new THREE.MeshBasicMaterial({ color: i % 3 === 0 ? '#ff7a1a' : '#4ade80' }), { y: .35 + i * .1, z: .43, cast: false })
+    const led = mesh(rbox(.3, .035, .02, .01, 2), new THREE.MeshBasicMaterial({ color: i % 3 === 0 ? '#ff5f3a' : '#4ade80' }), { y: .35 + i * .1, z: .43, cast: false })
     led.userData.phase = Math.random() * 10
     leds.push(led)
     server.add(led)
@@ -450,10 +450,10 @@ resize()
 const applyTheme = theme => {
     const dark = theme === 'dark'
     hemi.intensity = dark ? .55 : 1.6
-    hemi.color.set(dark ? '#9fb4ff' : '#fff6ea')
-    hemi.groundColor.set(dark ? '#20263d' : '#e8c9a5')
+    hemi.color.set(dark ? '#8fd9cc' : '#f6fbf9')
+    hemi.groundColor.set(dark ? '#0d2226' : '#cfe0da')
     sun.intensity = dark ? .7 : 2.2
-    sun.color.set(dark ? '#a8b8ff' : '#fff1dd')
+    sun.color.set(dark ? '#9fd8e0' : '#fff4ea')
     lampLight.intensity = dark ? 6 : 0
     bulb.material.color.set(dark ? '#ffd29a' : '#ffe2b8')
     shadowCatcher.material.opacity = dark ? .3 : .12

@@ -8,7 +8,7 @@ const finePointer = window.matchMedia('(pointer: fine)').matches
 const projects = {
     fiskality: {
         title: 'Fiskality',
-        image: 'assets/img/fiskality.jpg',
+        image: 'assets/img/fiskality.webp',
         meta: ['2025 — hoy', 'SaaS multiempresa', 'En producción'],
         summary: 'Plataforma para que empresas y despachos contables facturen, lleven su contabilidad electrónica y paguen su nómina desde un solo lugar.',
         bullets: [
@@ -25,7 +25,7 @@ const projects = {
     },
     presto: {
         title: 'Presto+ · Gestión de Préstamos',
-        image: 'assets/img/presto.jpg',
+        image: 'assets/img/presto.webp',
         meta: ['2025 — hoy', 'En producción'],
         summary: 'Sistema para administrar préstamos fijos y express: calcula cuotas, intereses y mora al día, registra pagos y entrega recibos en PDF.',
         bullets: [
@@ -42,7 +42,7 @@ const projects = {
     },
     sgse: {
         title: 'SGSE · Sistema de Gestión de Seguridad',
-        image: 'assets/img/sgse.jpg',
+        image: 'assets/img/sgse.webp',
         meta: ['2026', 'En producción'],
         summary: 'Plataforma para empresas de seguridad privada: controla guardias, turnos y rondines en cada sede.',
         bullets: [
@@ -50,12 +50,11 @@ const projects = {
             'Checkpoints escaneados con la cámara para registrar rondines.',
             'Turnos configurables (12/14 h) con calendario de carga tipo Gantt.',
             'Roles y permisos atómicos: super admin, admin, supervisor y guardia.',
-            'Tiempo real con Socket.io y despliegue automático por CI a VPS.'
+            'Tiempo real con Socket.io y despliegue automático por CI.'
         ],
         stack: ['NestJS', 'Next.js 15', 'React 19', 'TypeScript', 'Prisma', 'PostgreSQL', 'Socket.io', 'JWT', 'Docker'],
-        links: [
-            { label: 'Visitar SGSE', href: 'https://sgse.54-39-110-141.sslip.io', icon: 'bx-link-external', primary: true }
-        ]
+        links: [],
+        note: 'Producto privado: acceso solo para clientes, sin demo pública.'
     },
     vet: {
         title: 'Sistema de Gestión Veterinario',
@@ -135,7 +134,7 @@ const themeButton = $('#theme-button')
 const syncThemeIcon = () => {
     const dark = document.documentElement.dataset.theme === 'dark'
     themeButton.innerHTML = `<i class='bx ${dark ? 'bx-sun' : 'bx-moon'}'></i>`
-    $('meta[name="theme-color"]').setAttribute('content', dark ? '#0f1424' : '#f5ede3')
+    $('meta[name="theme-color"]').setAttribute('content', dark ? '#081214' : '#f3f5f2')
 }
 syncThemeIcon()
 
@@ -292,6 +291,32 @@ if (finePointer && !reduceMotion) {
         })
         el.addEventListener('pointerleave', () => { el.style.transform = '' })
     })
+}
+
+/*==================== PORTRAIT DEPTH ====================*/
+// Las capas del retrato están en distintos planos Z; girar el contenedor crea el efecto 3D
+const portrait = $('#portrait'),
+      aboutVisual = $('#about-visual')
+
+if (!reduceMotion) {
+    const tiltPortrait = (x, y) => {
+        portrait.style.transform = `rotateY(${x * 16}deg) rotateX(${-y * 12}deg)`
+    }
+
+    if (finePointer) {
+        aboutVisual.addEventListener('pointermove', e => {
+            const r = aboutVisual.getBoundingClientRect()
+            tiltPortrait((e.clientX - r.left) / r.width - .5, (e.clientY - r.top) / r.height - .5)
+        })
+        aboutVisual.addEventListener('pointerleave', () => tiltPortrait(0, 0))
+    } else {
+        // En táctil, el retrato gira suavemente con el scroll
+        window.addEventListener('scroll', () => {
+            const r = aboutVisual.getBoundingClientRect(),
+                  p = (r.top + r.height / 2) / innerHeight - .5
+            tiltPortrait(Math.sin(p * 3) * .35, p * .5)
+        }, { passive: true })
+    }
 }
 
 /*==================== MAGNETIC BUTTONS ====================*/
