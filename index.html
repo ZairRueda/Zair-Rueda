@@ -67,16 +67,17 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list" id="nav-list">
                     <span class="nav__indicator" id="nav-indicator"></span>
-                    <li><a href="#about" class="nav__link">Sobre mí</a></li>
-                    <li><a href="#experience" class="nav__link">Experiencia</a></li>
-                    <li><a href="#projects" class="nav__link">Proyectos</a></li>
+                    <li><a href="#about" class="nav__link" data-i18n="nav.about">Sobre mí</a></li>
+                    <li><a href="#experience" class="nav__link" data-i18n="nav.experience">Experiencia</a></li>
+                    <li><a href="#projects" class="nav__link" data-i18n="nav.projects">Proyectos</a></li>
                     <li><a href="#stack" class="nav__link">Stack</a></li>
-                    <li><a href="#contact" class="nav__link">Contacto</a></li>
+                    <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Contacto</a></li>
                 </ul>
             </div>
 
             <div class="nav__actions">
-                <a href="#contact" class="button button--accent nav__cta magnetic">Hablemos</a>
+                <a href="#contact" class="button button--accent nav__cta magnetic" data-i18n="nav.cta">Hablemos</a>
+                <button class="icon-button lang-button" id="lang-button" aria-label="Switch to English">EN</button>
                 <button class="icon-button" id="theme-button" aria-label="Cambiar tema">
                     <i class='bx bx-moon'></i>
                 </button>
@@ -92,31 +93,42 @@
         <section class="hero" id="home">
             <canvas class="hero__canvas" id="hero-canvas" aria-label="Escena 3D de un escritorio de desarrollador"></canvas>
 
+            <div class="desk-nav" role="group" aria-label="Explora el escritorio">
+                <p class="desk-nav__hint" data-i18n="desk.hint"><i class='bx bx-pointer'></i> Haz clic en el escritorio: todo lo que ves está en producción</p>
+                <div class="desk-nav__buttons">
+                    <button class="desk-btn" data-desk="fiskality"><span class="desk-btn__kind" data-i18n="desk.kind.monitor">Monitor</span> Fiskality</button>
+                    <button class="desk-btn" data-desk="presto"><span class="desk-btn__kind" data-i18n="desk.kind.monitor2">Monitor</span> Presto+</button>
+                    <button class="desk-btn" data-desk="sgse"><span class="desk-btn__kind">Tablet</span> SGSE <i class='bx bx-lock-alt'></i></button>
+                    <button class="desk-btn" data-desk="server"><span class="desk-btn__kind" data-i18n="desk.kind.server">Servidor</span> <span class="desk-status" id="desk-status"><span class="dot"></span> <span id="desk-status-text">…</span></span></button>
+                    <button class="desk-btn" data-desk="lamp"><span class="desk-btn__kind" data-i18n="desk.kind.lamp">Lámpara</span> <span id="desk-time">--:--</span> · Acapulco</button>
+                </div>
+            </div>
+
             <div class="hero__content container">
-                <p class="hero__hello reveal">Hola, soy</p>
+                <p class="hero__hello reveal" data-i18n="hero.hello">Hola, soy</p>
                 <h1 class="hero__title">
                     <span class="split">Andrés</span>
                     <span class="split">Zair</span>
                 </h1>
                 <span class="tag hero__tag reveal">FULL STACK SENIOR · LARAVEL · REACT · AWS</span>
 
-                <p class="hero__description reveal">
+                <p class="hero__description reveal" data-i18n="hero.desc">
                     Construyo sistemas en producción que <strong>ahorran dinero</strong>, eliminan errores
                     y escalan: de sistemas legacy en PHP a plataformas modernas con Laravel, React, Node.js y AWS.
                 </p>
 
                 <div class="hero__buttons reveal">
-                    <a href="#projects" class="button button--accent magnetic">
+                    <a href="#projects" class="button button--accent magnetic" data-i18n="hero.cta">
                         Ver proyectos <i class='bx bx-right-arrow-alt'></i>
                     </a>
-                    <a href="assets/pdf/CV-Zair.pdf" download class="button button--ghost magnetic">
+                    <a href="assets/pdf/CV-Zair.pdf" download class="button button--ghost magnetic" data-i18n="hero.cv">
                         Descargar CV <i class='bx bx-download'></i>
                     </a>
                 </div>
 
                 <ul class="hero__meta reveal">
-                    <li><i class='bx bx-map'></i> Acapulco, México</li>
-                    <li><span class="dot dot--live"></span> Disponible para proyectos</li>
+                    <li data-i18n="hero.location"><i class='bx bx-map'></i> Acapulco, México</li>
+                    <li data-i18n="hero.available"><span class="dot dot--live"></span> Disponible para proyectos</li>
                 </ul>
             </div>
 
@@ -139,19 +151,19 @@
                         <span class="portrait__layer portrait__chip chip-b"><i class='bx bxl-react'></i> React</span>
                         <span class="portrait__layer portrait__chip chip-c"><i class='bx bxl-nodejs'></i> Node.js</span>
                         <span class="portrait__layer portrait__chip chip-d"><i class='bx bxl-aws'></i> AWS</span>
-                        <div class="portrait__layer portrait__badge" aria-hidden="true"><div><strong>5+</strong><span>AÑOS</span></div></div>
+                        <div class="portrait__layer portrait__badge" aria-hidden="true"><div><strong>5+</strong><span data-i18n="about.badge">AÑOS</span></div></div>
                     </div>
                 </div>
 
                 <div class="about__data">
-                    <span class="tag tag--accent reveal">SOBRE MÍ</span>
-                    <h2 class="section__title reveal">Código con impacto en el negocio</h2>
-                    <p class="about__text reveal">
+                    <span class="tag tag--accent reveal" data-i18n="about.tag">SOBRE MÍ</span>
+                    <h2 class="section__title reveal" data-i18n="about.title">Código con impacto en el negocio</h2>
+                    <p class="about__text reveal" data-i18n="about.p1">
                         Soy Desarrollador Full Stack Senior con <strong>más de 5 años</strong> construyendo soluciones
                         tecnológicas en entornos de producción reales. Me especializo en arquitecturas escalables,
                         modernización de sistemas legacy y liderazgo técnico de equipos ágiles.
                     </p>
-                    <p class="about__text reveal">
+                    <p class="about__text reveal" data-i18n="about.p2">
                         Combino visión estratégica con ejecución técnica precisa: cada desarrollo tiene que mover
                         una métrica del negocio, ya sea dirigiendo un equipo o resolviendo la tarea crítica yo mismo.
                     </p>
@@ -159,27 +171,27 @@
                     <div class="stats">
                         <div class="stat reveal">
                             <span class="stat__value"><span data-count="5">0</span>+</span>
-                            <span class="stat__label">años en producción</span>
+                            <span class="stat__label" data-i18n="about.s1">años en producción</span>
                         </div>
                         <div class="stat reveal">
                             <span class="stat__value">-<span data-count="35">0</span>%</span>
-                            <span class="stat__label">errores operativos</span>
+                            <span class="stat__label" data-i18n="about.s2">errores operativos</span>
                         </div>
                         <div class="stat reveal">
                             <span class="stat__value">+<span data-count="50">0</span>%</span>
-                            <span class="stat__label">velocidad de procesamiento</span>
+                            <span class="stat__label" data-i18n="about.s3">velocidad de procesamiento</span>
                         </div>
                         <div class="stat reveal">
                             <span class="stat__value"><span data-count="3">0</span></span>
-                            <span class="stat__label">sistemas legacy modernizados</span>
+                            <span class="stat__label" data-i18n="about.s4">sistemas legacy modernizados</span>
                         </div>
                     </div>
 
                     <ul class="about__chips reveal">
                         <li><i class='bx bx-code-block'></i> Laravel · React · Node.js</li>
                         <li><i class='bx bx-cloud'></i> AWS · Docker · CI/CD</li>
-                        <li><i class='bx bx-group'></i> Liderazgo Scrum</li>
-                        <li><i class='bx bx-world'></i> Inglés B2</li>
+                        <li data-i18n="about.c3"><i class='bx bx-group'></i> Liderazgo Scrum</li>
+                        <li data-i18n="about.c4"><i class='bx bx-world'></i> Inglés B2</li>
                     </ul>
                 </div>
             </div>
@@ -189,8 +201,8 @@
         <section class="experience section" id="experience">
             <div class="container">
                 <header class="section__header">
-                    <span class="tag reveal">TRAYECTORIA</span>
-                    <h2 class="section__title reveal">Experiencia</h2>
+                    <span class="tag reveal" data-i18n="exp.tag">TRAYECTORIA</span>
+                    <h2 class="section__title reveal" data-i18n="exp.title">Experiencia</h2>
                 </header>
 
                 <div class="timeline" id="timeline">
@@ -203,32 +215,32 @@
                             <div class="job__head">
                                 <div>
                                     <h3 class="job__company">NAVIOMAR</h3>
-                                    <p class="job__role">Desarrollador Full Stack Senior</p>
-                                    <p class="job__place">Logística naval y transporte de carga · Acapulco, Gro.</p>
+                                    <p class="job__role" data-i18n="exp.n.role">Desarrollador Full Stack Senior</p>
+                                    <p class="job__place" data-i18n="exp.n.place">Logística naval y transporte de carga · Acapulco, Gro.</p>
                                 </div>
-                                <span class="job__date"><span class="dot dot--live"></span> May 2022 — Actualidad</span>
+                                <span class="job__date" data-i18n="exp.n.date"><span class="dot dot--live"></span> May 2022 — Actualidad</span>
                             </div>
 
                             <ul class="job__list">
-                                <li>
+                                <li data-i18n="exp.n.b1">
                                     <strong>Liderazgo técnico:</strong> dirigí un equipo de 4 desarrolladores en la creación de un
                                     sistema de gestión logística integrado, reduciendo un <mark>35%</mark> los errores operativos
                                     mediante automatización con Laravel y React.
                                 </li>
-                                <li>
+                                <li data-i18n="exp.n.b2">
                                     <strong>Rescate de proyecto crítico:</strong> detecté que un proveedor externo no estaba alineado
                                     con la operación real; asumí el proyecto, lo replanteé desde cero y lo entregué, evitando una
                                     pérdida de <mark>miles de pesos</mark> en honorarios y retrabajos.
                                 </li>
-                                <li>
+                                <li data-i18n="exp.n.b3">
                                     <strong>Migración estratégica:</strong> modernicé <mark>3 sistemas legacy</mark>
                                     (PHP 5.3 → PHP 8.3), mejorando seguridad, rendimiento y mantenibilidad.
                                 </li>
-                                <li>
+                                <li data-i18n="exp.n.b4">
                                     <strong>Integración de APIs:</strong> diseñé una API REST para sincronizar datos con socios
                                     externos, optimizando el tiempo de procesamiento en un <mark>50%</mark>.
                                 </li>
-                                <li>
+                                <li data-i18n="exp.n.b5">
                                     <strong>DevOps:</strong> implementé pipelines CI/CD con Docker y desplegué servicios en
                                     AWS (EC2 + S3), reduciendo tiempos de entrega.
                                 </li>
@@ -248,17 +260,17 @@
                             <div class="job__head">
                                 <div>
                                     <h3 class="job__company">Freelance</h3>
-                                    <p class="job__role">Desarrollador Web Full Stack</p>
-                                    <p class="job__place">Proyectos para clientes y pymes</p>
+                                    <p class="job__role" data-i18n="exp.f.role">Desarrollador Web Full Stack</p>
+                                    <p class="job__place" data-i18n="exp.f.place">Proyectos para clientes y pymes</p>
                                 </div>
-                                <span class="job__date">Ene 2021 — May 2022</span>
+                                <span class="job__date" data-i18n="exp.f.date">Ene 2021 — May 2022</span>
                             </div>
 
                             <ul class="job__list">
-                                <li>
+                                <li data-i18n="exp.f.b1">
                                     <strong>MLimpac:</strong> landing page con sistema de envío automatizado de correos (Nodemailer).
                                 </li>
-                                <li>
+                                <li data-i18n="exp.f.b2">
                                     <strong>Sistema Veterinario:</strong> aplicación para administrar citas médicas con agenda visual.
                                 </li>
                             </ul>
@@ -275,28 +287,28 @@
                         <div class="job__card job__card--soft">
                             <div class="job__head">
                                 <div>
-                                    <h3 class="job__company">Formación</h3>
-                                    <p class="job__role">Educación y certificaciones</p>
+                                    <h3 class="job__company" data-i18n="exp.e.title">Formación</h3>
+                                    <p class="job__role" data-i18n="exp.e.role">Educación y certificaciones</p>
                                 </div>
                             </div>
                             <ul class="edu">
                                 <li>
                                     <span class="edu__year">2023</span>
-                                    <div>
+                                    <div data-i18n="exp.e.1">
                                         <strong>Arquitectura de Software Escalable</strong>
                                         <p>Basado en <em>Designing Data-Intensive Applications</em> (M. Kleppmann): sistemas distribuidos, consistencia y tolerancia a fallos.</p>
                                     </div>
                                 </li>
                                 <li>
                                     <span class="edu__year">2019</span>
-                                    <div>
+                                    <div data-i18n="exp.e.2">
                                         <strong>Desarrollo Web Full Stack · Udemy</strong>
                                         <p>PHP, JavaScript, SQL y frameworks modernos.</p>
                                     </div>
                                 </li>
                                 <li>
                                     <span class="edu__year">2014–17</span>
-                                    <div>
+                                    <div data-i18n="exp.e.3">
                                         <strong>Bachillerato Físico-Matemáticas</strong>
                                         <p>CETMAR (Centro de Estudios Tecnológicos del Mar), Acapulco.</p>
                                     </div>
@@ -313,13 +325,13 @@
             <div class="container">
                 <header class="section__header section__header--row">
                     <div>
-                        <span class="tag reveal">EN PRODUCCIÓN</span>
-                        <h2 class="section__title reveal">Proyectos</h2>
+                        <span class="tag reveal" data-i18n="proj.tag">EN PRODUCCIÓN</span>
+                        <h2 class="section__title reveal" data-i18n="proj.title">Proyectos</h2>
                     </div>
 
                     <div class="filters reveal" role="tablist" aria-label="Filtrar proyectos">
-                        <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
-                        <button class="filter" data-filter="saas" role="tab" aria-selected="false">Plataformas</button>
+                        <button class="filter is-active" data-filter="all" role="tab" aria-selected="true" data-i18n="proj.f.all">Todos</button>
+                        <button class="filter" data-filter="saas" role="tab" aria-selected="false" data-i18n="proj.f.saas">Plataformas</button>
                         <button class="filter" data-filter="demo" role="tab" aria-selected="false">Demos</button>
                     </div>
                 </header>
@@ -330,14 +342,14 @@
                     <article class="project project--featured reveal" data-cat="saas" data-project="fiskality" tabindex="0">
                         <div class="project__cover tilt">
                             <img src="assets/img/fiskality.webp" alt="Página principal de Fiskality, plataforma de facturación y contabilidad" loading="lazy">
-                            <span class="badge badge--live"><span class="dot dot--live"></span> En producción · fiskality.com</span>
+                            <span class="badge badge--live" data-i18n="proj.badge.fisk"><span class="dot dot--live"></span> En producción · fiskality.com</span>
                         </div>
                         <div class="project__info">
                             <div>
                                 <h3 class="project__title">Fiskality</h3>
-                                <p class="project__subtitle">SaaS multiempresa de facturación CFDI 4.0, contabilidad electrónica y nómina para empresas y despachos contables</p>
+                                <p class="project__subtitle" data-i18n="proj.fisk.sub">SaaS multiempresa de facturación CFDI 4.0, contabilidad electrónica y nómina para empresas y despachos contables</p>
                             </div>
-                            <span class="project__year">2025 — hoy</span>
+                            <span class="project__year" data-i18n="proj.fisk.year">2025 — hoy</span>
                         </div>
                         <ul class="chips chips--sm"><li>Fastify</li><li>Next.js</li><li>PostgreSQL RLS</li><li>BullMQ</li><li>Docker</li></ul>
                     </article>
@@ -346,12 +358,12 @@
                     <article class="project reveal" data-cat="saas" data-project="presto" tabindex="0">
                         <div class="project__cover tilt">
                             <img src="assets/img/presto.webp" alt="Página principal de Presto+, gestión de préstamos" loading="lazy">
-                            <span class="badge badge--live"><span class="dot dot--live"></span> En producción</span>
+                            <span class="badge badge--live" data-i18n="proj.badge.presto"><span class="dot dot--live"></span> En producción</span>
                         </div>
                         <div class="project__info">
                             <div>
                                 <h3 class="project__title">Presto+</h3>
-                                <p class="project__subtitle">Préstamos fijos y express con mora calculada al día y recibos en PDF</p>
+                                <p class="project__subtitle" data-i18n="proj.presto.sub">Préstamos fijos y express con mora calculada al día y recibos en PDF</p>
                             </div>
                             <span class="project__year">2025</span>
                         </div>
@@ -362,12 +374,12 @@
                     <article class="project reveal" data-cat="saas" data-project="sgse" tabindex="0">
                         <div class="project__cover tilt">
                             <img src="assets/img/sgse.webp" alt="Pantalla de acceso de SGSE, sistema de gestión de seguridad" loading="lazy">
-                            <span class="badge badge--live"><span class="dot dot--live"></span> En producción · Privado</span>
+                            <span class="badge badge--live" data-i18n="proj.badge.sgse"><span class="dot dot--live"></span> En producción · Privado</span>
                         </div>
                         <div class="project__info">
                             <div>
                                 <h3 class="project__title">SGSE</h3>
-                                <p class="project__subtitle">Gestión de guardias de seguridad: turnos, rondines con QR y login por carnet</p>
+                                <p class="project__subtitle" data-i18n="proj.sgse.sub">Gestión de guardias de seguridad: turnos, rondines con QR y login por carnet</p>
                             </div>
                             <span class="project__year">2026</span>
                         </div>
@@ -378,12 +390,12 @@
                     <article class="project reveal" data-cat="demo" data-project="vet" tabindex="0">
                         <div class="project__cover tilt">
                             <img src="assets/img/portfolio2.png" alt="Sistema de citas para veterinaria" loading="lazy">
-                            <span class="badge badge--live"><span class="dot dot--live"></span> Demo en vivo</span>
+                            <span class="badge badge--live" data-i18n="proj.badge.vet"><span class="dot dot--live"></span> Demo en vivo</span>
                         </div>
                         <div class="project__info">
                             <div>
-                                <h3 class="project__title">Sistema Veterinario</h3>
-                                <p class="project__subtitle">Agenda de citas y registro de pacientes</p>
+                                <h3 class="project__title" data-i18n="proj.vet.title">Sistema Veterinario</h3>
+                                <p class="project__subtitle" data-i18n="proj.vet.sub">Agenda de citas y registro de pacientes</p>
                             </div>
                             <span class="project__year">2022</span>
                         </div>
@@ -394,12 +406,12 @@
                     <article class="project reveal" data-cat="demo" data-project="crypto" tabindex="0">
                         <div class="project__cover tilt">
                             <img src="assets/img/portfolio3.png" alt="Cotizador de criptomonedas" loading="lazy">
-                            <span class="badge badge--live"><span class="dot dot--live"></span> Demo en vivo</span>
+                            <span class="badge badge--live" data-i18n="proj.badge.crypto"><span class="dot dot--live"></span> Demo en vivo</span>
                         </div>
                         <div class="project__info">
                             <div>
                                 <h3 class="project__title">Crypto Checker</h3>
-                                <p class="project__subtitle">Cotización de criptomonedas en tiempo real</p>
+                                <p class="project__subtitle" data-i18n="proj.crypto.sub">Cotización de criptomonedas en tiempo real</p>
                             </div>
                             <span class="project__year">2022</span>
                         </div>
@@ -407,7 +419,7 @@
                     </article>
                 </div>
 
-                <a href="https://github.com/ZairRueda" target="_blank" rel="noopener" class="projects__more reveal magnetic">
+                <a href="https://github.com/ZairRueda" target="_blank" rel="noopener" class="projects__more reveal magnetic" data-i18n="proj.more">
                     <i class='bx bxl-github'></i> Más proyectos en GitHub <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
@@ -424,8 +436,8 @@
 
             <div class="container">
                 <header class="section__header">
-                    <span class="tag tag--accent reveal">HERRAMIENTAS</span>
-                    <h2 class="section__title reveal">Stack tecnológico</h2>
+                    <span class="tag tag--accent reveal" data-i18n="stack.tag">HERRAMIENTAS</span>
+                    <h2 class="section__title reveal" data-i18n="stack.title">Stack tecnológico</h2>
                 </header>
 
                 <div class="stack__grid">
@@ -441,7 +453,7 @@
                     </div>
                     <div class="stack__card reveal">
                         <i class='bx bx-data stack__icon'></i>
-                        <h3>Bases de datos</h3>
+                        <h3 data-i18n="stack.db">Bases de datos</h3>
                         <ul class="chips"><li>PostgreSQL</li><li>MySQL</li><li>MongoDB</li><li>Prisma ORM</li></ul>
                     </div>
                     <div class="stack__card reveal">
@@ -451,17 +463,17 @@
                     </div>
                     <div class="stack__card reveal">
                         <i class='bx bx-wrench stack__icon'></i>
-                        <h3>Herramientas</h3>
+                        <h3 data-i18n="stack.tools">Herramientas</h3>
                         <ul class="chips"><li>Git / GitHub</li><li>Jira</li><li>Jest</li><li>Socket.IO</li><li>Swagger</li><li>Zod</li><li>Nodemailer</li></ul>
                     </div>
                     <div class="stack__card stack__card--accent reveal">
                         <i class='bx bx-conversation stack__icon'></i>
-                        <h3>Idiomas</h3>
+                        <h3 data-i18n="stack.langs">Idiomas</h3>
                         <ul class="langs">
-                            <li><span>Español</span><span class="langs__bar"><i style="--w:100%"></i></span><em>Nativo</em></li>
-                            <li><span>Inglés</span><span class="langs__bar"><i style="--w:72%"></i></span><em>B2</em></li>
+                            <li data-i18n="stack.es"><span>Español</span><span class="langs__bar"><i style="--w:100%"></i></span><em>Nativo</em></li>
+                            <li data-i18n="stack.en"><span>Inglés</span><span class="langs__bar"><i style="--w:72%"></i></span><em>B2</em></li>
                         </ul>
-                        <p class="stack__note">Lectura técnica fluida, documentación y reuniones en inglés.</p>
+                        <p class="stack__note" data-i18n="stack.note">Lectura técnica fluida, documentación y reuniones en inglés.</p>
                     </div>
                 </div>
             </div>
@@ -472,12 +484,12 @@
             <div class="container">
                 <div class="contact__card reveal">
                     <div class="contact__blob" aria-hidden="true"></div>
-                    <span class="tag">¿NUEVO PROYECTO?</span>
-                    <h2 class="contact__title">
+                    <span class="tag" data-i18n="contact.tag">¿NUEVO PROYECTO?</span>
+                    <h2 class="contact__title" data-i18n="contact.title">
                         <span class="split">¡Trabajemos</span>
                         <span class="split">juntos!</span>
                     </h2>
-                    <p class="contact__text">
+                    <p class="contact__text" data-i18n="contact.text">
                         ¿Necesitas modernizar un sistema, lanzar un producto o reforzar a tu equipo?
                         Escríbeme y platicamos cómo puedo ayudarte.
                     </p>
@@ -505,7 +517,7 @@
     <footer class="footer">
         <div class="container footer__container">
             <a href="#home" class="icon-button" aria-label="Volver arriba"><i class='bx bx-up-arrow-alt'></i></a>
-            <p>© <span id="year">2026</span> Andrés Zair Jiménez Rueda · Hecho con HTML, CSS, JS y Three.js</p>
+            <p data-i18n="footer.made">© <span id="year">2026</span> Andrés Zair Jiménez Rueda · Hecho con HTML, CSS, JS y Three.js</p>
         </div>
     </footer>
 
@@ -516,6 +528,7 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="scene-label" id="scene-label" aria-hidden="true"></div>
 
     <!--==================== SCRIPTS ====================-->
     <script type="importmap">
@@ -526,6 +539,7 @@
             }
         }
     </script>
+    <script src="assets/js/i18n.js" defer></script>
     <script src="assets/js/main.js" defer></script>
     <script type="module" src="assets/js/scene.js"></script>
 </body>

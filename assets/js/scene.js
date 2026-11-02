@@ -1,5 +1,6 @@
 /*==================== HERO 3D SCENE ====================*/
 // Escritorio de desarrollador construido con geometría procedural (sin modelos externos).
+// Cada objeto interactivo lleva a algo real: proyectos en producción, estado de los servidores, hora local.
 import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
 
@@ -50,6 +51,8 @@ const addPiece = (obj, parent = world) => {
     pieces.push(obj)
     return obj
 }
+
+const t = key => window.i18n ? window.i18n.t(key) : key
 
 const COLORS = {
     cream: '#fbfcfa',
@@ -110,154 +113,150 @@ addPiece(desk)
 
 const TOP = DESK_Y + .07
 
-/*==================== SCREENS (CANVAS TEXTURES) ====================*/
-const makeScreen = (w, h) => {
+/*==================== PROJECT SCREENS ====================*/
+// Las pantallas muestran capturas reales de cada proyecto, con barra de navegador y estado en vivo
+const loadImage = src => new Promise(resolve => {
+    const img = new Image()
+    img.onload = () => resolve(img)
+    img.onerror = () => resolve(null)
+    img.src = src
+})
+
+const makeScreen = (w, h, opts) => {
     const c = document.createElement('canvas')
     c.width = w
     c.height = h
     const tex = new THREE.CanvasTexture(c)
     tex.colorSpace = THREE.SRGBColorSpace
-    tex.anisotropy = 4
-    return { c, ctx: c.getContext('2d'), tex }
+    tex.anisotropy = 8
+    const screen = { c, ctx: c.getContext('2d'), tex, img: null, hover: false, status: null, ...opts }
+    loadImage(opts.src).then(img => { screen.img = img; drawScreen(screen) })
+    return screen
 }
 
-const codeLines = [
-    "Route::middleware('auth')->group(function () {",
-    "    Route::get('/tickets', [TicketController::class, 'index']);",
-    "    Route::post('/tickets', [TicketController::class, 'store']);",
-    "});",
-    "",
-    "class TicketController extends Controller",
-    "{",
-    "    public function store(StoreTicketRequest $request)",
-    "    {",
-    "        $ticket = Ticket::create($request->validated());",
-    "        broadcast(new TicketCreated($ticket));",
-    "",
-    "        return response()->json($ticket, 201);",
-    "    }",
-    "}"
-]
-
-const KEYWORDS = /^(class|extends|public|function|return|new|use|const|async|await)$/
-const tokenColor = tok => {
-    if (/^['"]/.test(tok)) return '#a5e075'
-    if (/^\$/.test(tok)) return '#ffa95e'
-    if (KEYWORDS.test(tok)) return '#c792ea'
-    if (/^[A-Z]/.test(tok)) return '#ffd866'
-    if (/^[(){}\[\];,>:=-]+$/.test(tok)) return '#89ddff'
-    return '#e6e6f0'
+const roundRect = (ctx, x, y, w, h, r) => {
+    ctx.beginPath()
+    ctx.roundRect(x, y, w, h, r)
 }
 
-const editor = makeScreen(768, 448)
-let typed = 0
-const totalChars = codeLines.reduce((n, l) => n + l.length + 1, 0)
-
-const drawEditor = () => {
-    const { ctx, c } = editor
-    ctx.fillStyle = '#1e1f29'
+const drawScreen = s => {
+    const { ctx, c } = s
+    const bar = s.chrome ? Math.round(c.height * .075) : 0
+    ctx.fillStyle = '#16181d'
     ctx.fillRect(0, 0, c.width, c.height)
-    ctx.fillStyle = '#2a2b38'
-    ctx.fillRect(0, 0, c.width, 34)
-    ;['#ff5f57', '#febc2e', '#28c840'].forEach((col, i) => {
-        ctx.fillStyle = col
-        ctx.beginPath()
-        ctx.arc(20 + i * 20, 17, 6, 0, Math.PI * 2)
-        ctx.fill()
-    })
-    ctx.fillStyle = '#ff5f3a'
-    ctx.fillRect(90, 0, 190, 34)
-    ctx.fillStyle = '#fff'
-    ctx.font = 'bold 15px monospace'
-    ctx.fillText('TicketController.php', 102, 22)
 
-    ctx.font = '17px monospace'
-    let remaining = typed, y = 64
-    for (let i = 0; i < codeLines.length; i++) {
-        ctx.fillStyle = '#555872'
-        ctx.fillText(String(i + 1).padStart(2, ' '), 12, y)
-        const line = codeLines[i].slice(0, Math.max(0, remaining))
-        let x = 52
-        line.split(/(\s+|'[^']*'?|[(){}\[\];,]|->|::)/).filter(Boolean).forEach(tok => {
-            ctx.fillStyle = tokenColor(tok)
-            ctx.fillText(tok, x, y)
-            x += ctx.measureText(tok).width
-        })
-        if (remaining >= 0 && remaining <= codeLines[i].length && Math.floor(performance.now() / 400) % 2) {
-            ctx.fillStyle = '#ff5f3a'
-            ctx.fillRect(x + 1, y - 15, 9, 19)
-        }
-        remaining -= codeLines[i].length + 1
-        y += 25
+    if (s.img) {
+        // Recorte tipo "cover" anclado arriba
+        const ratio = Math.max(c.width / s.img.width, (c.height - bar) / s.img.height)
+        const w = s.img.width * ratio, h = s.img.height * ratio
+        ctx.drawImage(s.img, (c.width - w) / 2, bar, w, h)
     }
-    editor.tex.needsUpdate = true
+
+    if (s.chrome) {
+        ctx.fillStyle = '#eceff1'
+        ctx.fillRect(0, 0, c.width, bar)
+        ;['#ff5f57', '#febc2e', '#28c840'].forEach((col, i) => {
+            ctx.fillStyle = col
+            ctx.beginPath()
+            ctx.arc(bar * .6 + i * bar * .5, bar / 2, bar * .14, 0, Math.PI * 2)
+            ctx.fill()
+        })
+        ctx.fillStyle = '#ffffff'
+        roundRect(ctx, bar * 2.3, bar * .18, c.width * .55, bar * .64, bar * .32)
+        ctx.fill()
+        ctx.fillStyle = '#4b5563'
+        ctx.font = `600 ${Math.round(bar * .36)}px Inter, sans-serif`
+        ctx.textBaseline = 'middle'
+        ctx.fillText('🔒 ' + s.url, bar * 2.6, bar / 2 + 1)
+
+        {
+            const online = s.status === true
+            const label = online ? t('desk.online') : s.status === false ? t('desk.offline') : t('desk.checking')
+            ctx.font = `700 ${Math.round(bar * .36)}px Inter, sans-serif`
+            const tw = ctx.measureText(label).width
+            const x = c.width - tw - bar * 1.3
+            ctx.fillStyle = online ? '#16a36a' : s.status === false ? '#ff5f3a' : '#9ca3af'
+            ctx.beginPath()
+            ctx.arc(x - bar * .3, bar / 2, bar * .14, 0, Math.PI * 2)
+            ctx.fill()
+            ctx.fillStyle = '#111827'
+            ctx.fillText(label, x, bar / 2 + 1)
+        }
+    }
+
+    if (s.locked) {
+        ctx.fillStyle = 'rgba(8, 18, 20, .55)'
+        ctx.fillRect(0, 0, c.width, c.height)
+        ctx.fillStyle = '#ffffff'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.font = `${Math.round(c.height * .16)}px sans-serif`
+        ctx.fillText('🔒', c.width / 2, c.height * .42)
+        ctx.font = `700 ${Math.round(c.height * .075)}px Inter, sans-serif`
+        ctx.fillText(t('desk.private'), c.width / 2, c.height * .62)
+        ctx.textAlign = 'left'
+    }
+
+    if (s.hover) {
+        ctx.fillStyle = 'rgba(11, 110, 102, .35)'
+        ctx.fillRect(0, bar, c.width, c.height - bar)
+        const label = t('desk.open')
+        ctx.font = `700 ${Math.round(c.height * .07)}px Inter, sans-serif`
+        const tw = ctx.measureText(label).width + c.height * .12
+        const h = c.height * .14
+        ctx.fillStyle = '#ff5f3a'
+        roundRect(ctx, (c.width - tw) / 2, (c.height + bar - h) / 2, tw, h, h / 2)
+        ctx.fill()
+        ctx.fillStyle = '#ffffff'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.fillText(label, c.width / 2, (c.height + bar) / 2 + 1)
+        ctx.textAlign = 'left'
+    }
+
+    s.tex.needsUpdate = true
 }
 
-const terminal = makeScreen(768, 448)
-const logLines = [
-    ['$ ', 'docker compose up -d --build', '#e6e6f0'],
-    ['✔ ', 'api      Started', '#7ee787'],
-    ['✔ ', 'postgres Healthy', '#7ee787'],
-    ['$ ', 'npm run test', '#e6e6f0'],
-    ['PASS ', 'tickets.e2e-spec.ts (42 tests)', '#7ee787'],
-    ['$ ', 'deploy --target aws-ec2', '#e6e6f0'],
-    ['↑ ', 'Uploading build to S3...', '#ffd866'],
-    ['✔ ', 'Deployed in 38s 🚀', '#7ee787']
-]
-let shownLogs = 0
-const bars = Array.from({ length: 9 }, () => Math.random())
-
-const drawTerminal = t => {
-    const { ctx, c } = terminal
-    ctx.fillStyle = '#16171f'
-    ctx.fillRect(0, 0, c.width, c.height)
-
-    // Mini dashboard
-    ctx.fillStyle = '#20222d'
-    ctx.fillRect(16, 16, c.width - 32, 170)
-    ctx.fillStyle = '#8b8fa8'
-    ctx.font = 'bold 15px sans-serif'
-    ctx.fillText('Requests / min', 32, 42)
-    ctx.fillStyle = '#7ee787'
-    ctx.fillText('● 99.98% uptime', c.width - 175, 42)
-    bars.forEach((b, i) => {
-        const h = 30 + (Math.sin(t * 1.6 + i * .8) * .5 + .5) * 70 * (.5 + b * .5)
-        const grad = ctx.createLinearGradient(0, 170 - h, 0, 170)
-        grad.addColorStop(0, '#ff5f3a')
-        grad.addColorStop(1, '#f1c97a')
-        ctx.fillStyle = grad
-        ctx.fillRect(40 + i * 76, 170 - h, 46, h)
-    })
-
-    // Logs
-    ctx.font = '17px monospace'
-    logLines.slice(0, shownLogs).forEach(([prefix, text, color], i) => {
-        const y = 222 + i * 26
-        ctx.fillStyle = prefix.trim() === '$' ? '#ff5f3a' : color
-        ctx.fillText(prefix, 20, y)
-        ctx.fillStyle = color
-        ctx.fillText(text, 20 + ctx.measureText(prefix).width, y)
-    })
-    terminal.tex.needsUpdate = true
+const screens = {
+    fiskality: makeScreen(1024, 585, { src: 'assets/img/fiskality.webp', url: 'fiskality.com', chrome: true }),
+    presto: makeScreen(1024, 585, { src: 'assets/img/presto.webp', url: 'presto-plus · préstamos', chrome: true }),
+    sgse: makeScreen(768, 560, { src: 'assets/img/sgse.webp', locked: true })
 }
 
 const screenMat = tex => new THREE.MeshBasicMaterial({ map: tex, toneMapped: false })
 
-const makeMonitor = (tex, x, ry) => {
+const makeMonitor = (screen, x, ry) => {
     const g = new THREE.Group()
     g.add(mesh(rbox(.5, .04, .3, .02), mat(COLORS.dark), { y: TOP + .02 }))
     g.add(mesh(rbox(.08, .45, .08, .03), mat(COLORS.dark), { y: TOP + .25, z: -.04 }))
     g.add(mesh(rbox(1.5, .9, .07, .04), mat(COLORS.darker), { y: TOP + .78 }))
-    const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.4, .8), screenMat(tex))
-    screen.position.set(0, TOP + .78, .037)
-    g.add(screen)
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(1.4, .8), screenMat(screen.tex))
+    plane.position.set(0, TOP + .78, .037)
+    g.add(plane)
     g.position.set(x, 0, -.38)
     g.rotation.y = ry
+    g.userData.screen = plane
     return g
 }
 
-addPiece(makeMonitor(editor.tex, -.82, .22))
-addPiece(makeMonitor(terminal.tex, .82, -.22))
+const monitorLeft = addPiece(makeMonitor(screens.fiskality, -.82, .22))
+const monitorRight = addPiece(makeMonitor(screens.presto, .82, -.22))
+
+/*==================== TABLET (SGSE) ====================*/
+const tablet = new THREE.Group()
+tablet.add(mesh(rbox(.3, .03, .22, .02), mat(COLORS.dark), { y: TOP + .015, z: .02 }))
+const tabletBody = new THREE.Group()
+tabletBody.add(mesh(rbox(.62, .46, .03, .03), mat(COLORS.darker), {}))
+const tabletScreen = new THREE.Mesh(new THREE.PlaneGeometry(.56, .4), screenMat(screens.sgse.tex))
+tabletScreen.position.z = .017
+tabletBody.add(tabletScreen)
+tabletBody.position.set(0, TOP + .25, 0)
+tabletBody.rotation.x = -.32
+tablet.add(tabletBody)
+tablet.position.set(-.98, 0, .3)
+tablet.rotation.y = .35
+tablet.userData.screen = tabletScreen
+addPiece(tablet)
 
 /*==================== KEYBOARD & MOUSE ====================*/
 const keyboard = new THREE.Group()
@@ -276,10 +275,10 @@ for (let row = 0; row < 4; row++) {
 keys.castShadow = true
 keyboard.add(keys)
 keyboard.add(mesh(rbox(.36, .03, .07, .012, 2), mat(COLORS.orange), { y: TOP + .062, z: .2 }))
-keyboard.position.set(-.1, 0, .32)
+keyboard.position.set(.08, 0, .32)
 addPiece(keyboard)
 
-const mouse = mesh(new THREE.SphereGeometry(.1, 24, 16), mat('#ffffff'), { x: .75, y: TOP + .03, z: .36 })
+const mouse = mesh(new THREE.SphereGeometry(.1, 24, 16), mat('#ffffff'), { x: .86, y: TOP + .03, z: .36 })
 mouse.scale.set(.75, .35, 1)
 addPiece(mouse)
 
@@ -320,12 +319,12 @@ addPiece(deskPlant)
 /*==================== BOOKS ====================*/
 const books = new THREE.Group()
 ;[[COLORS.navy, 0], ['#e85d4a', .02], [COLORS.yellow, -.03]].forEach(([color, r], i) => {
-    books.add(mesh(rbox(.5, .07, .34, .015), mat(color), { y: TOP + .035 + i * .072, ry: r + i * .08 }))
+    books.add(mesh(rbox(.42, .07, .3, .015), mat(color), { y: TOP + .035 + i * .072, ry: r + i * .08 }))
 })
-books.position.set(-1.45, 0, .3)
+books.position.set(-1.55, 0, .38)
 addPiece(books)
 
-/*==================== RUBBER DUCK (interactive) ====================*/
+/*==================== RUBBER DUCK ====================*/
 const duck = new THREE.Group()
 const duckMat = mat('#ffd23f')
 duck.add(mesh(new THREE.SphereGeometry(.11, 20, 16), duckMat, { y: .09 }))
@@ -333,7 +332,7 @@ duck.children[0].scale.set(1.15, .85, 1)
 duck.add(mesh(new THREE.SphereGeometry(.075, 20, 16), duckMat, { y: .22, z: .02 }))
 duck.add(mesh(new THREE.ConeGeometry(.035, .07, 12), mat(COLORS.orange), { y: .21, z: .1, rx: Math.PI / 2 }))
 ;[-.035, .035].forEach(x => duck.add(mesh(new THREE.SphereGeometry(.013, 8, 8), mat('#222'), { x, y: .245, z: .08 })))
-duck.position.set(1.1, TOP, -.05)
+duck.position.set(1.12, TOP, -.05)
 duck.rotation.y = -.5
 addPiece(duck)
 
@@ -351,11 +350,12 @@ lamp.rotation.y = .5
 addPiece(lamp)
 
 /*==================== SERVER TOWER ====================*/
+// Los LEDs reflejan el estado real de los proyectos en producción
 const server = new THREE.Group()
 server.add(mesh(rbox(.5, 1.0, .85, .05), mat(COLORS.dark), { y: .58 }))
 const leds = []
 for (let i = 0; i < 6; i++) {
-    const led = mesh(rbox(.3, .035, .02, .01, 2), new THREE.MeshBasicMaterial({ color: i % 3 === 0 ? '#ff5f3a' : '#4ade80' }), { y: .35 + i * .1, z: .43, cast: false })
+    const led = mesh(rbox(.3, .035, .02, .01, 2), new THREE.MeshBasicMaterial({ color: '#9ca3af' }), { y: .35 + i * .1, z: .43, cast: false })
     led.userData.phase = Math.random() * 10
     leds.push(led)
     server.add(led)
@@ -411,8 +411,8 @@ const noteTexture = (text, bg) => {
 const board = new THREE.Group()
 board.add(mesh(rbox(1.7, 1.1, .08, .05), mat(COLORS.woodDark), {}))
 board.add(mesh(rbox(1.55, .95, .02, .02), mat(COLORS.cork), { z: .04, cast: false }))
-;[['Laravel', '#ffd166', -.5, .18, .08], ['React', '#a0e7e5', .05, .22, -.1], ['AWS', '#ffadad', .52, .1, .12], ['Node.js', '#caffbf', -.22, -.22, -.06], ['Docker', '#bdb2ff', .35, -.22, .1]].forEach(([t, c, x, y, r]) => {
-    const note = mesh(new THREE.PlaneGeometry(.38, .38), new THREE.MeshStandardMaterial({ map: noteTexture(t, c), roughness: .9 }), { x, y, z: .055, rz: r, cast: false })
+;[['Laravel', '#ffd166', -.5, .18, .08], ['React', '#a0e7e5', .05, .22, -.1], ['AWS', '#ffadad', .52, .1, .12], ['Node.js', '#caffbf', -.22, -.22, -.06], ['Docker', '#bdb2ff', .35, -.22, .1]].forEach(([text, c, x, y, r]) => {
+    const note = mesh(new THREE.PlaneGeometry(.38, .38), new THREE.MeshStandardMaterial({ map: noteTexture(text, c), roughness: .9 }), { x, y, z: .055, rz: r, cast: false })
     board.add(note)
     board.add(mesh(new THREE.SphereGeometry(.03, 10, 10), mat('#e04848'), { x, y: y + .15, z: .07, cast: false }))
 })
@@ -421,32 +421,58 @@ board.rotation.y = -.12
 addPiece(board)
 floating.push(board)
 
-/*==================== LAYOUT / RESIZE ====================*/
-const target = new THREE.Vector3(0, 1.55, 0)
-let isMobile = false
+/*==================== CAMERA RIG ====================*/
+// La cámara se mueve suavemente entre la vista general y el acercamiento a una pantalla
+const heroEl = document.getElementById('home')
+const rig = {
+    basePos: new THREE.Vector3(),
+    baseTarget: new THREE.Vector3(0, 1.55, 0),
+    pos: new THREE.Vector3(),
+    target: new THREE.Vector3(0, 1.55, 0),
+    focus: null,
+    offset: 0,
+    baseOffset: 0
+}
+let isMobile = false, viewW = 1, viewH = 1
 
 const resize = () => {
     const w = canvas.clientWidth,
           h = canvas.clientHeight
     if (!w || !h) return
+    viewW = w
+    viewH = h
     renderer.setSize(w, h, false)
     camera.aspect = w / h
     isMobile = w < 900
 
     // En pantallas anchas desplazamos la escena a la derecha para dejar espacio al texto
-    if (!isMobile) camera.setViewOffset(w, h, -w * .2, 0, w, h)
-    else camera.clearViewOffset()
-
+    rig.baseOffset = isMobile ? 0 : -.2
     const dist = isMobile ? 10.2 : Math.max(10.5, 13.5 - camera.aspect * 1.4)
-    camera.position.set(dist * .55, dist * .5, dist * .78)
-    camera.lookAt(target)
+    rig.basePos.set(dist * .55, dist * .5, dist * .78)
+    if (!rig.pos.lengthSq()) {
+        rig.pos.copy(rig.basePos)
+        rig.offset = rig.baseOffset
+    }
     camera.updateProjectionMatrix()
 }
 
 new ResizeObserver(resize).observe(canvas)
 resize()
 
+const focusOn = obj => {
+    world.updateMatrixWorld(true)
+    const screen = obj.userData.screen
+    const center = new THREE.Vector3()
+    screen.getWorldPosition(center)
+    const normal = new THREE.Vector3(0, 0, 1).applyQuaternion(screen.getWorldQuaternion(new THREE.Quaternion()))
+    const size = screen.geometry.parameters.width
+    rig.focus = { pos: center.clone().add(normal.multiplyScalar(size * 2.1)), target: center }
+    heroEl.classList.add('is-focused')
+    setHover(null)
+}
+
 /*==================== THEME ====================*/
+let lampOn = false
 const applyTheme = theme => {
     const dark = theme === 'dark'
     hemi.intensity = dark ? .55 : 1.6
@@ -454,99 +480,191 @@ const applyTheme = theme => {
     hemi.groundColor.set(dark ? '#0d2226' : '#cfe0da')
     sun.intensity = dark ? .7 : 2.2
     sun.color.set(dark ? '#9fd8e0' : '#fff4ea')
-    lampLight.intensity = dark ? 6 : 0
-    bulb.material.color.set(dark ? '#ffd29a' : '#ffe2b8')
+    lampOn = dark
     shadowCatcher.material.opacity = dark ? .3 : .12
 }
 applyTheme(document.documentElement.dataset.theme)
 window.addEventListener('themechange', e => applyTheme(e.detail))
 
+/*==================== STATUS ====================*/
+const status = { fiskality: null, presto: null }
+
+const paintLeds = () => {
+    const values = Object.values(status)
+    leds.forEach((led, i) => {
+        const v = values[i % values.length]
+        led.material.color.set(v === true ? '#4ade80' : v === false ? '#ff5f3a' : '#9ca3af')
+    })
+}
+
+const applyStatus = detail => {
+    Object.assign(status, detail)
+    screens.fiskality.status = status.fiskality
+    screens.presto.status = status.presto
+    drawScreen(screens.fiskality)
+    drawScreen(screens.presto)
+    paintLeds()
+}
+window.addEventListener('status:update', e => applyStatus(e.detail))
+// Si la verificación terminó antes de que cargara la escena
+if (window.liveStatus) applyStatus(window.liveStatus)
+
+window.addEventListener('langchange', () => Object.values(screens).forEach(drawScreen))
+
 /*==================== INTERACTION ====================*/
 const pointer = new THREE.Vector2(),
       smooth = new THREE.Vector2(),
-      raycaster = new THREE.Raycaster()
+      raycaster = new THREE.Raycaster(),
+      labelEl = document.getElementById('scene-label')
 
-let duckJump = 0
+let duckJump = 0, lampPulse = 0
+
+const toast = msg => {
+    const el = document.getElementById('toast')
+    el.textContent = msg
+    el.classList.add('is-visible')
+    clearTimeout(toast.timer)
+    toast.timer = setTimeout(() => el.classList.remove('is-visible'), 2400)
+}
+
+const openProject = key => {
+    focusOn(key === 'fiskality' ? monitorLeft : key === 'presto' ? monitorRight : tablet)
+    setTimeout(() => window.openProject && window.openProject(key), reduceMotion ? 0 : 750)
+}
+
+// Objetos interactivos: qué hacen y qué etiqueta muestran al pasar el cursor
+const interactives = [
+    { obj: monitorLeft, key: 'fiskality', label: () => t('desk.label.fiskality'), action: () => openProject('fiskality') },
+    { obj: monitorRight, key: 'presto', label: () => t('desk.label.presto'), action: () => openProject('presto') },
+    { obj: tablet, key: 'sgse', label: () => t('desk.label.sgse'), action: () => openProject('sgse') },
+    {
+        obj: server, key: 'server', label: () => t('desk.label.server'),
+        action: () => {
+            const up = Object.values(status).filter(v => v === true).length
+            toast(`🖥️ ${up}/${Object.keys(status).length} ${t('desk.serverToast')}`)
+        }
+    },
+    {
+        obj: lamp, key: 'lamp', label: () => t('desk.label.lamp'),
+        action: () => {
+            lampOn = !lampOn
+            lampPulse = 1
+            toast(`💡 ${window.localTime ? window.localTime() : ''} ${t('desk.lampToast')}`)
+        }
+    },
+    { obj: board, key: 'board', label: () => t('desk.label.board'), action: () => document.getElementById('stack').scrollIntoView({ behavior: 'smooth' }) },
+    {
+        obj: duck, key: 'duck', label: () => t('desk.label.duck'),
+        action: () => { duckJump = 1; toast(t('desk.duckToast')) }
+    }
+]
+
+let hovered = null
+
+const pick = e => {
+    const r = canvas.getBoundingClientRect()
+    raycaster.setFromCamera({ x: ((e.clientX - r.left) / r.width) * 2 - 1, y: -((e.clientY - r.top) / r.height) * 2 + 1 }, camera)
+    const hits = raycaster.intersectObjects(interactives.map(i => i.obj), true)
+    if (!hits.length) return null
+    let o = hits[0].object
+    while (o && !interactives.find(i => i.obj === o)) o = o.parent
+    return interactives.find(i => i.obj === o) || null
+}
+
+const setHover = item => {
+    if (hovered === item) return
+    if (hovered && screens[hovered.key]) { screens[hovered.key].hover = false; drawScreen(screens[hovered.key]) }
+    hovered = item
+    if (item && screens[item.key] && !screens[item.key].locked) { screens[item.key].hover = true; drawScreen(screens[item.key]) }
+    canvas.style.cursor = item ? 'pointer' : ''
+    labelEl.classList.toggle('is-visible', !!item)
+    if (item) labelEl.textContent = item.label()
+}
 
 window.addEventListener('pointermove', e => {
     pointer.x = (e.clientX / innerWidth) * 2 - 1
     pointer.y = (e.clientY / innerHeight) * 2 - 1
 })
 
-const hitDuck = e => {
-    const r = canvas.getBoundingClientRect()
-    raycaster.setFromCamera({ x: ((e.clientX - r.left) / r.width) * 2 - 1, y: -((e.clientY - r.top) / r.height) * 2 + 1 }, camera)
-    return raycaster.intersectObject(duck, true).length > 0
-}
-
-canvas.addEventListener('pointermove', e => { canvas.style.cursor = hitDuck(e) ? 'pointer' : '' })
-canvas.addEventListener('click', e => {
-    if (!hitDuck(e)) return
-    duckJump = 1
-    const toast = document.getElementById('toast')
-    toast.textContent = '🦆 ¡Cuac! Rubber duck debugging activado'
-    toast.classList.add('is-visible')
-    setTimeout(() => toast.classList.remove('is-visible'), 2000)
+canvas.addEventListener('pointermove', e => {
+    if (rig.focus) return
+    setHover(pick(e))
+    if (hovered) labelEl.style.transform = `translate(${e.clientX + 16}px, ${e.clientY + 18}px)`
 })
+canvas.addEventListener('pointerleave', () => setHover(null))
+canvas.addEventListener('click', e => {
+    const item = pick(e)
+    if (item) item.action()
+})
+
+// Al cerrar el caso de estudio, la cámara regresa a la vista general
+window.addEventListener('project:close', () => {
+    rig.focus = null
+    heroEl.classList.remove('is-focused')
+})
+
+// API para los botones accesibles debajo de la escena
+window.deskScene = {
+    activate: key => {
+        const item = interactives.find(i => i.key === key)
+        if (item) item.action()
+    }
+}
 
 /*==================== LOOP ====================*/
 let visible = true,
-    introStart = null,
-    lastType = 0,
-    lastLog = 0,
-    pauseUntil = 0
+    introStart = null
 
 new IntersectionObserver(([entry]) => { visible = entry.isIntersecting }).observe(canvas)
 
-const elastic = t => t === 0 || t === 1 ? t : Math.pow(2, -10 * t) * Math.sin((t * 10 - .75) * (2 * Math.PI / 3)) + 1
+const elastic = x => x === 0 || x === 1 ? x : Math.pow(2, -10 * x) * Math.sin((x * 10 - .75) * (2 * Math.PI / 3)) + 1
 
 const clock = new THREE.Clock()
+const lampAnchor = new THREE.Vector3(.58, .7, 0)
 
 const tick = () => {
     requestAnimationFrame(tick)
     if (!visible || document.hidden) return
 
-    const t = clock.getElapsedTime(),
+    const time = clock.getElapsedTime(),
           now = performance.now()
 
     // Entrada de piezas
     if (introStart !== null && !reduceMotion) {
         pieces.forEach((p, i) => {
             const local = Math.min(Math.max((now - introStart - i * 70) / 900, 0), 1)
-            p.scale.copy(p.userData.baseScale).multiplyScalar(Math.max(elastic(local), .0001))
+            const hover = hovered && hovered.obj === p ? 1.04 : 1
+            p.scale.copy(p.userData.baseScale).multiplyScalar(Math.max(elastic(local), .0001) * (local === 1 ? hover : 1))
         })
     }
 
-    // Código tecleándose
-    if (now > pauseUntil && now - lastType > 28) {
-        typed += 1 + Math.round(Math.random())
-        lastType = now
-        if (typed > totalChars + 2) { pauseUntil = now + 2500; typed = 0 }
-    }
-    drawEditor()
-
-    // Logs de terminal
-    if (now - lastLog > 900) {
-        shownLogs = shownLogs >= logLines.length + 2 ? 0 : shownLogs + 1
-        lastLog = now
-    }
-    drawTerminal(reduceMotion ? 0 : t)
+    // Cámara: vista general o acercamiento
+    const goal = rig.focus || { pos: rig.basePos, target: rig.baseTarget }
+    const ease = reduceMotion ? 1 : .07
+    rig.pos.lerp(goal.pos, ease)
+    rig.target.lerp(goal.target, ease)
+    rig.offset += ((rig.focus ? 0 : rig.baseOffset) - rig.offset) * ease
+    camera.position.copy(rig.pos)
+    camera.lookAt(rig.target)
+    if (Math.abs(rig.offset) > .001) camera.setViewOffset(viewW, viewH, viewW * rig.offset, 0, viewW, viewH)
+    else camera.clearViewOffset()
 
     // Idle
     if (!reduceMotion) {
-        floating.forEach((f, i) => { f.position.y += Math.sin(t * 1.2 + i * 1.5) * .0012 })
-        deskPlant.rotation.z = Math.sin(t * 1.4) * .03
+        floating.forEach((f, i) => { f.position.y += Math.sin(time * 1.2 + i * 1.5) * .0012 })
+        deskPlant.rotation.z = Math.sin(time * 1.4) * .03
         steam.forEach(s => {
-            const p = (t * .45 + s.userData.offset) % 1
+            const p = (time * .45 + s.userData.offset) % 1
             s.position.set(Math.sin(p * 6 + s.userData.offset * 8) * .03, TOP + .28 + p * .45, 0)
             s.scale.setScalar(.6 + p * 1.2)
             s.material.opacity = Math.sin(p * Math.PI) * .55
         })
-        leds.forEach(l => { l.visible = Math.sin(t * 6 + l.userData.phase * 3) > -.6 })
+        leds.forEach(l => { l.visible = Math.sin(time * 6 + l.userData.phase * 3) > -.6 })
 
+        const parallax = rig.focus ? 0 : 1
         smooth.lerp(pointer, .05)
-        world.rotation.y = smooth.x * .12
-        world.rotation.x = smooth.y * .03
+        world.rotation.y += (smooth.x * .12 * parallax - world.rotation.y) * .1
+        world.rotation.x += (smooth.y * .03 * parallax - world.rotation.x) * .1
     }
 
     // Salto del pato
@@ -557,7 +675,11 @@ const tick = () => {
         duck.rotation.y = -.5 + (1 - duckJump) * Math.PI * 2
     }
 
-    lampLight.position.copy(lamp.localToWorld(new THREE.Vector3(.58, .7, 0)))
+    // Lámpara
+    lampPulse = Math.max(lampPulse - .03, 0)
+    lampLight.intensity += ((lampOn ? 6 : 0) + lampPulse * 4 - lampLight.intensity) * .15
+    bulb.material.color.set(lampOn ? '#ffd29a' : '#ffe2b8')
+    lampLight.position.copy(lamp.localToWorld(lampAnchor.clone()))
 
     renderer.render(scene, camera)
 }

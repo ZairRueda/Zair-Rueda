@@ -211,13 +211,15 @@ window.addEventListener('scroll', onScroll, { passive: true })
 onScroll()
 
 /*==================== SPLIT TEXT ====================*/
-$$('.split').forEach(el => {
+const splitText = () => $$('.split').forEach(el => {
+    if (el.querySelector('.char')) return
     const text = el.textContent.trim()
     el.setAttribute('aria-label', text)
     el.innerHTML = [...text].map((ch, i) =>
         `<span class="char" aria-hidden="true" style="--i:${i}">${ch === ' ' ? '&nbsp;' : ch}</span>`
     ).join('')
 })
+splitText()
 
 /*==================== REVEAL ON SCROLL ====================*/
 const revealObserver = new IntersectionObserver(entries => {
@@ -361,16 +363,23 @@ const modal = $('#project-modal'),
       modalContent = $('#modal-content')
 
 const openProject = key => {
-    const p = projects[key]
-    if (!p) return
+    const base = projects[key]
+    if (!base) return
 
-    const media = `<img src="${p.image}" alt="">`
+    // En inglés se superponen los textos traducidos sobre los datos en español
+    const en = i18n.lang === 'en' ? i18n.projects[key] || {} : {}
+    const p = { ...base, ...en, links: base.links.map((l, i) => ({ ...l, label: (en.links && en.links[i]) || l.label })) }
+
+    const live = liveStatus[key]
+    const statusLine = live === undefined || live === null ? '' : `
+        <p class="modal__status ${live ? 'is-up' : 'is-down'}"><span class="dot ${live ? 'dot--live' : ''}"></span> ${i18n.t(live ? 'status.live' : 'status.down')}</p>`
 
     modalContent.innerHTML = `
-        <div class="modal__media">${media}</div>
+        <div class="modal__media"><img src="${p.image}" alt=""></div>
         <div class="modal__body">
             <div class="modal__meta">${p.meta.map(m => `<span>${m}</span>`).join('')}</div>
             <h3 id="modal-title">${p.title}</h3>
+            ${statusLine}
             <p>${p.summary}</p>
             <ul class="job__list">${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
             <ul class="chips">${p.stack.map(s => `<li>${s}</li>`).join('')}</ul>
@@ -381,12 +390,16 @@ const openProject = key => {
                 </a>`).join('')}</div>` : ''}
         </div>`
 
-    modal.showModal()
+    if (!modal.open) modal.showModal()
     document.body.style.overflow = 'hidden'
 }
+window.openProject = openProject
 
 const closeModal = () => modal.close()
-modal.addEventListener('close', () => { document.body.style.overflow = '' })
+modal.addEventListener('close', () => {
+    document.body.style.overflow = ''
+    window.dispatchEvent(new Event('project:close'))
+})
 $('#modal-close').addEventListener('click', closeModal)
 modal.addEventListener('click', e => { if (e.target === modal) closeModal() })
 
@@ -412,11 +425,83 @@ $('#copy-email').addEventListener('click', async e => {
     const email = e.currentTarget.dataset.email
     try {
         await navigator.clipboard.writeText(email)
-        showToast('📋 Correo copiado')
+        showToast(i18n.t('toast.copied'))
     } catch (err) {
         showToast(email)
     }
 })
 
-/*==================== YEAR ====================*/
-$('#year').textContent = new Date().getFullYear()
+/*==================== LIVE STATUS ====================*/
+// Comprueba desde el navegador del visitante que los proyectos públicos respondan.
+// Con mode: 'no-cors' la respuesta es opaca: si llega, el servidor está arriba.
+const statusTargets = {
+    fiskality: 'https://api.fiskality.com/health',
+    presto: 'https://presta-mas.54-39-110-141.sslip.io/'
+}
+const liveStatus = { fiskality: null, presto: null }
+window.liveStatus = liveStatus
+
+const ping = url => {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), 8000)
+    return fetch(url, { mode: 'no-cors', cache: 'no-store', signal: controller.signal })
+        .then(() => true, () => false)
+        .finally(() => clearTimeout(timer))
+}
+
+const renderDeskStatus = () => {
+    const values = Object.values(liveStatus),
+          up = values.filter(v => v === true).length,
+          done = values.every(v => v !== null)
+    $('#desk-status-text').textContent = done ? `${up}/${values.length} ${i18n.t('desk.statusShort')}` : i18n.t('desk.checking')
+    $('#desk-status .dot').classList.toggle('dot--live', done && up === values.length)
+}
+
+Promise.all(Object.entries(statusTargets).map(([key, url]) => ping(url).then(ok => { liveStatus[key] = ok })))
+    .then(() => {
+        renderDeskStatus()
+        window.dispatchEvent(new CustomEvent('status:update', { detail: { ...liveStatus } }))
+    })
+renderDeskStatus()
+
+/*==================== LOCAL TIME ====================*/
+window.localTime = () => new Intl.DateTimeFormat(i18n.lang === 'en' ? 'en-US' : 'es-MX', {
+    hour: 'numeric', minute: '2-digit', timeZone: 'America/Mexico_City'
+}).format(new Date())
+
+const renderTime = () => { $('#desk-time').textContent = window.localTime() }
+renderTime()
+setInterval(renderTime, 30000)
+
+/*==================== DESK BUTTONS ====================*/
+// Alternativa accesible (y para móvil) a hacer clic en los objetos 3D
+$$('.desk-btn').forEach(btn => btn.addEventListener('click', () => {
+    const key = btn.dataset.desk
+    if (window.deskScene) return window.deskScene.activate(key)
+    if (projects[key]) return openProject(key)
+    if (key === 'lamp') return showToast(`💡 ${window.localTime()} ${i18n.t('desk.lampToast')}`)
+    if (key === 'server') return showToast($('#desk-status-text').textContent)
+}))
+
+/*==================== LANGUAGE ====================*/
+const langButton = $('#lang-button')
+
+const syncLang = () => {
+    const en = i18n.lang === 'en'
+    langButton.textContent = en ? 'ES' : 'EN'
+    langButton.setAttribute('aria-label', i18n.t('lang.switch'))
+    themeButton.setAttribute('aria-label', i18n.t('theme.switch'))
+    $('#year').textContent = new Date().getFullYear()
+}
+
+langButton.addEventListener('click', () => i18n.set(i18n.lang === 'en' ? 'es' : 'en', true))
+
+window.addEventListener('langchange', () => {
+    syncLang()
+    splitText()
+    $$('.split').forEach(el => { if (el.closest('.is-visible, .hero')) el.classList.add('is-in') })
+    renderDeskStatus()
+    renderTime()
+    moveIndicator($('.nav__link.is-active'))
+})
+syncLang()
